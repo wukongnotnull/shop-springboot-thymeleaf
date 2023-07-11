@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wukongnotnull.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.wukongnotnull.shop.domain.User">
+            <id property="uId" column="u_id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="age" column="age" jdbcType="INTEGER"/>
+            <result property="email" column="email" jdbcType="VARCHAR"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
+            <result property="version" column="version" jdbcType="INTEGER"/>
+            <result property="sex" column="sex" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        u_id,name,age,
+        email,is_deleted,version,
+        sex
+    </sql>
+</mapper>
