@@ -59,7 +59,7 @@ public class IndexConfig implements Serializable {
     /**
      * 创建者id
      */
-    private Integer createUser;
+    private Integer createBy;
 
     /**
      * 最新修改时间
@@ -69,7 +69,7 @@ public class IndexConfig implements Serializable {
     /**
      * 修改者id
      */
-    private Integer updateUser;
+    private Integer updateBy;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

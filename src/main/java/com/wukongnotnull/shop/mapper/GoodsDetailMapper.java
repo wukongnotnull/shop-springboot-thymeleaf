@@ -2,14 +2,25 @@ package com.wukongnotnull.shop.mapper;
 
 import com.wukongnotnull.shop.domain.GoodsDetail;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
-* @author wukong
+* @author 悟空非空也
 * @description 针对表【shop_goods_detail】的数据库操作Mapper
-* @createDate 2023-07-11 15:40:44
-* @Entity com.wukongnotnull.shop.domain.GoodsDetail
 */
+@Mapper
 public interface GoodsDetailMapper extends BaseMapper<GoodsDetail> {
+
+    /**
+     *  根据商品 id 列表，获得商品信息列表
+     * @param goodsIdList 商品 id 列表
+     * @return List<GoodsDetail>
+     */
+    List<GoodsDetail> getGoodsDetailList(@Param("goodsIdList") List<Long> goodsIdList);
+
 
 }
 

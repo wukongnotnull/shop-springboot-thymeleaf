@@ -1,7 +1,10 @@
 package com.wukongnotnull.shop.service;
 
+import com.wukongnotnull.shop.controller.vo.IndexCarouselVO;
 import com.wukongnotnull.shop.domain.Carousel;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
 * @author wukong
@@ -10,4 +13,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface CarouselService extends IService<Carousel> {
 
+    /**
+     * 获得轮播图数据
+     * @return  List<Carousel>
+     */
+    List<IndexCarouselVO>getIndexCarousel();
 }

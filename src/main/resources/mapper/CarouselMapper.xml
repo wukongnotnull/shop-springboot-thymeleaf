@@ -11,14 +11,23 @@
             <result property="carouselRank" column="carousel_rank" jdbcType="INTEGER"/>
             <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="createUser" column="create_user" jdbcType="INTEGER"/>
+            <result property="createUser" column="create_by" jdbcType="INTEGER"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-            <result property="updateUser" column="update_user" jdbcType="INTEGER"/>
+            <result property="updateUser" column="update_by" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         carousel_id,carousel_url,redirect_url,
         carousel_rank,is_deleted,create_time,
-        create_user,update_time,update_user
+        create_by,update_time,update_by
     </sql>
+
+    <select id="getIndexCarousel" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from shop_carousel
+        where is_deleted = 0
+        order by carousel_rank desc
+        limit #{num}
+    </select>
 </mapper>

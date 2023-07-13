@@ -17,10 +17,11 @@
             <result property="stockNum" column="stock_num" jdbcType="INTEGER"/>
             <result property="tag" column="tag" jdbcType="VARCHAR"/>
             <result property="goodsSellStatus" column="goods_sell_status" jdbcType="TINYINT"/>
-            <result property="createUser" column="create_user" jdbcType="INTEGER"/>
+            <result property="createBy" column="create_by" jdbcType="INTEGER"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updateUser" column="update_user" jdbcType="INTEGER"/>
+            <result property="updateBy" column="update_by" jdbcType="INTEGER"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -28,7 +29,19 @@
         goods_category_id,goods_cover_img,goods_carousel,
         goods_detail_content,original_price,selling_price,
         stock_num,tag,goods_sell_status,
-        create_user,create_time,update_user,
-        update_time
+        create_by,create_time,update_by,
+        update_time,is_deleted
     </sql>
+
+    <select id="getGoodsDetailList" resultType="com.wukongnotnull.shop.domain.GoodsDetail">
+        select
+        <include refid="Base_Column_List"/>
+        from shop_goods_detail
+        where goods_id in
+        <foreach  item="goodsId" collection="goodsIdList" open="(" separator="," close=")">
+            #{goodsId}
+        </foreach>
+        and is_deleted = 0
+        order by create_time desc
+    </select>
 </mapper>

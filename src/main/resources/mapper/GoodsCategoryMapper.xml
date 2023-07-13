@@ -12,15 +12,31 @@
             <result property="categoryRank" column="category_rank" jdbcType="INTEGER"/>
             <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="createUser" column="create_user" jdbcType="INTEGER"/>
+            <result property="createBy" column="create_by" jdbcType="INTEGER"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-            <result property="updateUser" column="update_user" jdbcType="INTEGER"/>
+            <result property="updateBy" column="update_by" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         category_id,category_level,parent_id,
         category_name,category_rank,is_deleted,
-        create_time,create_user,update_time,
-        update_user
+        create_time,create_by,update_time,
+        update_by
     </sql>
+
+<!--    根据分类级别、父分类id、最大数量 查询商品一级分类列表-->
+    <select id="selectByLevelAndParentIdsAndNumber" resultType="com.wukongnotnull.shop.domain.GoodsCategory">
+        select <include refid="Base_Column_List"/>
+        from shop_goods_category
+        where category_level = #{categoryLevel}
+        and parent_id in
+        <foreach item="parentId" collection="parentIds" open="(" close=")" separator=",">
+            #{parentId}
+        </foreach>
+        and is_deleted = 0
+        order by category_rank desc
+        <if test="categoryMaxNum > 0">
+            limit 0, #{categoryMaxNum}
+        </if>
+    </select>
 </mapper>

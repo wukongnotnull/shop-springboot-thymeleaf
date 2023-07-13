@@ -9,7 +9,7 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * 
+ * @author  悟空非空也
  * @TableName shop_goods_detail
  */
 @TableName(value ="shop_goods_detail")
@@ -79,7 +79,7 @@ public class GoodsDetail implements Serializable {
     /**
      * 添加者主键id
      */
-    private Integer createUser;
+    private Integer createBy;
 
     /**
      * 商品添加时间
@@ -89,13 +89,17 @@ public class GoodsDetail implements Serializable {
     /**
      * 修改者主键id
      */
-    private Integer updateUser;
+    private Integer updateBy;
 
     /**
      * 商品修改时间
      */
     private Date updateTime;
 
+    /**
+     * 删除标识字段
+     */
+    private Integer isDeleted;
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

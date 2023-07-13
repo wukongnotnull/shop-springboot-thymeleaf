@@ -1,7 +1,10 @@
 package com.wukongnotnull.shop.service;
 
+import com.wukongnotnull.shop.controller.vo.IndexCategoryVO;
 import com.wukongnotnull.shop.domain.GoodsCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
 * @author wukong
@@ -10,4 +13,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface GoodsCategoryService extends IService<GoodsCategory> {
 
+
+    /**
+     * 查询首页侧边分类导航数据
+     * @return List<IndexCategoryVO>
+     */
+    List<IndexCategoryVO> getIndexCategoryNav();
 }
