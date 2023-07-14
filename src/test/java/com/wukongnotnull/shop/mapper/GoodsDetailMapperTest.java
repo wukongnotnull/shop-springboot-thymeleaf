@@ -21,7 +21,7 @@ class GoodsDetailMapperTest {
         ids.add(10015L);
         ids.add(10035L);
         ids.add(10003L);
-        List<GoodsDetail> goodsDetailList = goodsDetailMapper.getGoodsDetailList(ids);
+        List<GoodsDetail> goodsDetailList = goodsDetailMapper.getGoodsDetailListOnSale(ids);
         System.out.println("goodsDetailList = " + goodsDetailList);
     }
 

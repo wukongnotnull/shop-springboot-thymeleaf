@@ -19,9 +19,14 @@ public interface GoodsDetailMapper extends BaseMapper<GoodsDetail> {
      * @param goodsIdList 商品 id 列表
      * @return List<GoodsDetail>
      */
-    List<GoodsDetail> getGoodsDetailList(@Param("goodsIdList") List<Long> goodsIdList);
+    List<GoodsDetail> getGoodsDetailListOnSale(@Param("goodsIdList") List<Long> goodsIdList);
 
-
+    /**
+     *  根据 商品id 查询对应商品信息
+     * @param goodsId 商品id
+     * @return GoodsDetail
+     */
+    GoodsDetail selectGoodsDetail(@Param("goodsId") Long goodsId);
 }
 
 

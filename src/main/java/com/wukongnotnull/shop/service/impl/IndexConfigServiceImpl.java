@@ -2,7 +2,6 @@ package com.wukongnotnull.shop.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wukongnotnull.shop.common.Constants;
-import com.wukongnotnull.shop.common.IndexConfigTypeEnum;
 import com.wukongnotnull.shop.controller.vo.IndexGoodsVO;
 import com.wukongnotnull.shop.domain.GoodsDetail;
 import com.wukongnotnull.shop.domain.IndexConfig;
@@ -49,7 +48,7 @@ public class IndexConfigServiceImpl extends ServiceImpl<IndexConfigMapper, Index
                     collect(Collectors.toList());
 
             // 根据 goods_id 列表查询对应的 goods_detail 商品信息列表
-            List<GoodsDetail> goodsDetailList = goodsDetailMapper.getGoodsDetailList(goodsIdList);
+            List<GoodsDetail> goodsDetailList = goodsDetailMapper.getGoodsDetailListOnSale(goodsIdList);
 
             if(!CollectionUtils.isEmpty(goodsDetailList)){
                 // do to vo

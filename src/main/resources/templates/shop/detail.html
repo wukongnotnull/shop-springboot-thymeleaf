@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="shop/header::head-fragment('NewBee商城-商品详情','detail')">
+<head th:replace="shop/common/header::head-fragment('wukong商城-商品详情','detail')">
 </head>
 <body>
-<header th:replace="shop/header::header-fragment"></header>
+<header th:replace="shop/common/header::header-fragment"></header>
 
 <div id="detail">
     <!-- nav -->
-    <nav th:replace="shop/header::nav-fragment"></nav>
+    <nav th:replace="shop/common/header::nav-fragment"></nav>
 
     <div class="dc">
         <div class="content w">
@@ -18,13 +18,21 @@
 
     <div class="intro mt20 w clearfix">
         <div class="left fl" style="position: relative;">
-            <div class="swiper-container fl">
-                <img th:src="@{${goodsDetail.goodsCoverImg}}">
+            <div class="swiper-container fl" >
+                <!--<img th:src="@{${goodsDetail.goodsCoverImg}}">-->
+                <div class="swiper-wrapper">
+                    <th:block th:each="goodsCarousel : ${goodsDetail.goodsCarouselList}">
+                        <div class="swiper-slide">
+                            <img th:src="@{${goodsCarousel}}">
+                        </div>
+                    </th:block>
+                </div>
+
             </div>
         </div>
         <div class="right fr">
-            <div class="h3 ml20 mt20" th:text="${goodsDetail.goodsName}">NewBeeshop</div>
-            <div class="sub_title mr40 ml20 mt10" th:text="${goodsDetail.goodsIntro}">NewBeeshop</div>
+            <div class="h3 ml20 mt20" th:text="${goodsDetail.goodsName}">wukongshop</div>
+            <div class="sub_title mr40 ml20 mt10" th:text="${goodsDetail.goodsIntro}">wukongshop</div>
             <div class="item_price mr40 ml20 mt10">
                 <th:block th:text="${goodsDetail.sellingPrice}+'.00 元'"></th:block>
                 <del>
@@ -63,7 +71,7 @@
     </div>
 </div>
 
-<div th:replace="shop/footer::footer-fragment"></div>
+<div th:replace="shop/common/footer::footer-fragment"></div>
 
 <!-- jQuery -->
 <script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>

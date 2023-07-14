@@ -42,9 +42,9 @@ public class GoodsDetail implements Serializable {
     private String goodsCoverImg;
 
     /**
-     * 商品轮播图
+     * 商品轮播图集合
      */
-    private String goodsCarousel;
+    private String goodsCarousels;
 
     /**
      * 商品详情

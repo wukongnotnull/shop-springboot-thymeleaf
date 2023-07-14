@@ -25,7 +25,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
     @Autowired
     private MyInterceptor myInterceptor;
 
-    @Override
+    /*@Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 访问 /** 路径，进入 myInterceptor 拦截器，除了 /login.html 不进入该拦截器
         registry.addInterceptor(myInterceptor)
@@ -41,9 +41,10 @@ public class MyMvcConfig implements WebMvcConfigurer {
                         "/upload/**",
                         "/admin/**",
                         "/shop/**",
+                        "/goods/**",
                         "/favicon.ico");
     }
-
+*/
 
     // url 路径映射本地的静态资源
     @Override
