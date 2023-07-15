@@ -1,4 +1,4 @@
-package com.wukongnotnull.shop.controller;
+package com.wukongnotnull.shop.controller.shop;
 
 import com.wukongnotnull.shop.controller.vo.GoodsDetailVO;
 import com.wukongnotnull.shop.exception.ParamsException;

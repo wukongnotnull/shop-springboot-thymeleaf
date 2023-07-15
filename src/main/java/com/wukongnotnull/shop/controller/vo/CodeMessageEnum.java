@@ -10,7 +10,9 @@ public enum CodeMessageEnum {
     NOT_FOND(40000,"NOT_FOUND"),
     SERVER_ERROR(50000,"SERVER_ERROR"),
     PARAMS_ERROR(1314,"PARAMS_ERROR"),
-    SYSTEM_ERROR(520,"SYSTEM_ERROR")
+    SYSTEM_ERROR(520,"SYSTEM_ERROR"),
+    REGISTER_ERROR(21000,"REGISTER_ERROR"),
+    PARAM_IS_NULL(22000,"PARAM_IS_NULL")
     ;
     private int code;
     private String msg;
