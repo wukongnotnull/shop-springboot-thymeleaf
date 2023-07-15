@@ -15,14 +15,16 @@
     <description>基于 springboot 和 thymeleaf 的电商项目</description>
     <properties>
         <java.version>17</java.version>
+        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
+        <hutool-captcha.version>5.8.7</hutool-captcha.version>
+        <alibaba-druid.version>1.2.16</alibaba-druid.version>
     </properties>
     <dependencies>
-
         <!-- 验证码 -->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-captcha</artifactId>
-            <version>5.8.20</version>
+            <version>${hutool-captcha.version}</version>
         </dependency>
 
         <dependency>
@@ -59,14 +61,14 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.3.1</version>
+            <version>${mybatis-plus.version}</version>
         </dependency>
 
         <!-- 阿里巴巴 druid 数据源-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.2.16</version>
+            <version>${alibaba-druid.version}</version>
         </dependency>
 
         <dependency>
@@ -81,6 +83,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.7.5</version>
                 <configuration>
                     <excludes>
                         <exclude>
