@@ -35,5 +35,13 @@ public class Constants {
     /**
      * 本地静态图片资源路径，记得路径末尾加 /
      */
-    public static final String FILE_UPLOAD_DIC = "/Users/wukong/Downloads/shop-springboot-thymeleaf/src/main/resources/upload/";
+    public static final String FILE_UPLOAD_DIC = "/Users/wukong/IdeaProjects/shop-springboot-thymeleaf/src/main/resources/upload/";
+    /**
+     * 图片验证码 key
+     */
+    public static final String SHOP_VERIFY_CODE_KEY = "SHOP_VERIFY_CODE_KEY";
+    /**
+     * 登录成功 Key
+     */
+    public static final String LOGIN_SUCCESS_SESSION_KEY = "LOGIN_SUCCESS_SESSION_KEY" ;
 }

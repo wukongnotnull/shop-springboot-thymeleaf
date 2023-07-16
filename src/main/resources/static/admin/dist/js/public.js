@@ -20,7 +20,8 @@ function isNull(obj) {
  * @returns {boolean}
  */
 function validLength(obj, length) {
-    if (obj.trim().length < length) {
+    if (obj.trim().length === length) {
+        console.log("验证的长度为：",obj.trim().length);
         return true;
     }
     return false;

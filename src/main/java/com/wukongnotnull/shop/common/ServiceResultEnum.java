@@ -64,7 +64,10 @@ public enum ServiceResultEnum {
 
     NO_PERMISSION_ERROR("无权限！"),
 
+    PASSWORD_IS_ILLEGAL("密码不合法"),
+
     DB_ERROR("database error");
+
 
     private String result;
 

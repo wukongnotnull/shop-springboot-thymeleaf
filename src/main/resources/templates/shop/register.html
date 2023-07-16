@@ -40,8 +40,8 @@
                         验证码:&nbsp;
                         <input class="login-info-input verify-code" type="text" name="verifyCode" id="verifyCode"
                                placeholder="请输入验证码"/>
-                        <img alt="单击图片刷新！" style="top: 16px;position: relative;" th:src="@{/common/shop/kaptcha}"
-                             onclick="this.src='/common/shop/kaptcha?d='+new Date()*1">
+                        <img alt="单击图片刷新！" style="top: 16px;position: relative;" th:src="@{/common/shop/captcha}"
+                             onclick="this.src='/common/shop/captcha?d='+new Date()*1">
                     </div>
                 </div>
                 <div class="login_submit">
@@ -77,7 +77,7 @@
             return false;
         }
         var verifyCode = $("#verifyCode").val();
-        if (!validLength(verifyCode, 5)) {
+        if (!validLength(verifyCode, 4)) {
             Swal.fire({
                 text: "请输入正确的验证码",
                 icon: "error",iconColor:"#f05b72",
@@ -86,13 +86,13 @@
         }
         // 进行注册操作
         var params = $("#registerForm").serialize();
-        var url = '/register';
+        var url = '/doRegister';
         $.ajax({
             type: 'POST',//方法类型
             url: url,
             data: params,
             success: function (response) {
-                if (response.code == 200) {
+                if (response.code === 20000) {
                     Swal.fire({
                         title: "注册成功",
                         text: "是否跳转至登录页?",
@@ -117,7 +117,7 @@
             },
             error: function () {
                 Swal.fire({
-                    text: '操作失败',
+                    text: 'AJAX error',
                     icon: "error",iconColor:"#f05b72",
                 });
             }

@@ -10,11 +10,11 @@ import lombok.Data;
 
 /**
  * 
- * @TableName shop_shopping_cart_item
+ * @TableName shop_cart_item
  */
-@TableName(value ="shop_shopping_cart_item")
+@TableName(value ="shop_cart_item")
 @Data
-public class ShoppingCartItem implements Serializable {
+public class CartItem implements Serializable {
     /**
      * 购物项主键id
      */
@@ -50,6 +50,16 @@ public class ShoppingCartItem implements Serializable {
      * 最新修改时间
      */
     private Date updateTime;
+
+    /**
+     * 创建人
+     */
+    private Long createBy;
+
+    /**
+     * 更新人
+     */
+    private Long updateBy;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
