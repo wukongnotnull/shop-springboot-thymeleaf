@@ -26,6 +26,20 @@ public interface OrdinaryUserMapper extends BaseMapper<OrdinaryUser> {
      * @return 是否添加成功
      */
     int insertOrdinaryUser(OrdinaryUser registerUser);
+
+    /**
+     * 修改用户信息
+     * @param ordinaryUser ordinaryUser
+     * @return Integer
+     */
+    Integer updateOrdinaryUser(OrdinaryUser ordinaryUser);
+
+    /**
+     * 根据 userId 查询用户信息
+     * @param userId
+     * @return
+     */
+    OrdinaryUser selectOrdinaryUserById(@Param("userId")Long userId);
 }
 
 

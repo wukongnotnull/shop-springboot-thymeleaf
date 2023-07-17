@@ -5,7 +5,6 @@ import com.wukongnotnull.shop.common.Constants;
 import com.wukongnotnull.shop.common.ServiceResultEnum;
 import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
 import com.wukongnotnull.shop.domain.OrdinaryUser;
-import com.wukongnotnull.shop.mapper.CartItemMapper;
 import com.wukongnotnull.shop.service.CartItemService;
 import com.wukongnotnull.shop.service.OrdinaryUserService;
 import com.wukongnotnull.shop.mapper.OrdinaryUserMapper;
@@ -15,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 /**
 * @author 悟空非空也
@@ -25,9 +25,11 @@ public class OrdinaryUserServiceImpl extends ServiceImpl<OrdinaryUserMapper, Ord
     implements OrdinaryUserService{
 
     @Autowired
-    private OrdinaryUserMapper ordinaryUserMapper;
+    private  CartItemService cartItemService;
+
     @Autowired
-    private CartItemMapper cartItemMapper;
+    private OrdinaryUserMapper ordinaryUserMapper;
+
 
     /**
      * 根据用户名和密码添加用户（注册）
@@ -69,7 +71,7 @@ public class OrdinaryUserServiceImpl extends ServiceImpl<OrdinaryUserMapper, Ord
     @Override
     public String handleLogin(String loginName,
                                     String password,
-                                    HttpSession session
+                                    HttpSession httpSession
     ) {
         // 根据 loginName 对数据库进行查询是否存在该用户
         OrdinaryUser ordinaryUser = ordinaryUserMapper.selectOrdinaryUser(loginName);
@@ -87,15 +89,43 @@ public class OrdinaryUserServiceImpl extends ServiceImpl<OrdinaryUserMapper, Ord
         OrdinaryUserVO ordinaryUserVO = new OrdinaryUserVO();
         BeanUtil.copyProperties(ordinaryUser, ordinaryUserVO);
 
+
         //  根据 用户id 查询购物车中明细记录数
-        Integer cartItemCount = cartItemMapper.selectCartItemCount(ordinaryUser.getUserId());
-        ordinaryUserVO.setCartItemCount(cartItemCount);
+        Integer cartItemCount1 = cartItemService.getCartItemCount(ordinaryUser.getUserId());
+        ordinaryUserVO.setCartItemCount(cartItemCount1);
 
         // 将 ordinaryUser 加入到 session 中
-        session.setAttribute(Constants.LOGIN_SUCCESS_SESSION_KEY,ordinaryUserVO);
+        httpSession.setAttribute(Constants.LOGIN_SUCCESS_SESSION_KEY,ordinaryUserVO);
 
         return ServiceResultEnum.SUCCESS.getResult();
     }
+
+    /**
+     * 更新用户信息中的地址
+     * @param ordinaryUser ordinaryUser
+     * @param  httpSession httpSession
+     * @return String
+     */
+    @Override
+    public String updateAddress(OrdinaryUser ordinaryUser,HttpSession httpSession) {
+        // 修改 修改人和修改时间字段
+        ordinaryUser.setUpdateBy(ordinaryUser.getUserId());
+        ordinaryUser.setUpdateTime(new Date());
+
+       Integer i =  ordinaryUserMapper.updateOrdinaryUser(ordinaryUser);
+
+       if(i == 1){
+           // 更新的地址，存入到 Session 中
+           OrdinaryUser ordinaryUser1 = ordinaryUserMapper.selectOrdinaryUserById(ordinaryUser.getUserId());
+           OrdinaryUserVO tmpOrdinaryUserVO = new OrdinaryUserVO();
+           BeanUtil.copyProperties(ordinaryUser1,tmpOrdinaryUserVO);
+           httpSession.setAttribute(Constants.LOGIN_SUCCESS_SESSION_KEY,tmpOrdinaryUserVO);
+           return ServiceResultEnum.SUCCESS.getResult();
+       }else{
+           return ServiceResultEnum.ERROR.getResult();
+       }
+    }
+
 }
 
 

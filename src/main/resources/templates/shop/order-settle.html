@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="shop/header::head-fragment('NewBee商城-订单结算','order-detail')">
-</head>
+<head th:replace="shop/common/header::head-fragment('wukong 商城-订单结算','order-detail')"></head>
 <link th:href="@{/shop/css/bootstrap-modal.css}" rel="stylesheet">
 <body>
-<header th:replace="shop/header::header-fragment"></header>
+<header th:replace="shop/common/header::header-fragment"></header>
 <!-- nav -->
-<nav th:replace="shop/header::nav-fragment"></nav>
+<nav th:replace="shop/common/header::nav-fragment"></nav>
 
 <!-- personal -->
 <div id="personal">
     <div class="self-info center">
 
-        <!-- sidebar -->
+        <!-- sidebar  左边侧边栏 -->
         <div th:replace="shop/personal-sidebar::sidebar-fragment"></div>
 
         <div class="intro fr">
@@ -59,7 +58,7 @@
                                 <table class="order-items-table">
                                     <tbody>
 
-                                    <th:block th:each="item : ${myShoppingCartItems}">
+                                    <th:block th:each="item : ${cartItemVOListPage}">
                                         <tr>
                                             <td class="col col-thumb">
                                                 <div class="figure figure-thumb">
@@ -92,8 +91,8 @@
                                     <tr>
                                         <th>收货地址：</th>
                                         <td class="user_address_label"
-                                            th:text="${session.newBeeshopUser.address==''?'无':session.newBeeshopUser.address}">
-                                            newbee
+                                            th:text="${session.LOGIN_SUCCESS_SESSION_KEY.address ==''?'无~~':session.LOGIN_SUCCESS_SESSION_KEY.address}">
+                                            默认地址
                                         </td>
                                     </tr>
                                     </tbody>
@@ -121,7 +120,7 @@
                                     <tbody>
                                     <tr>
                                         <th>商品总价：</th>
-                                        <td><span class="num" th:text="${priceTotal+'.00'}">1299.00</span>元</td>
+                                        <td><span class="num" th:text="${goodsTotalPrice+'.00'}">1299.00</span>元</td>
                                     </tr>
                                     <tr>
                                         <th>运费：</th>
@@ -129,7 +128,7 @@
                                     </tr>
                                     <tr>
                                         <th class="total">应付金额：</th>
-                                        <td class="total"><span class="num" th:text="${priceTotal+'.00'}">1299.00</span>元
+                                        <td class="total"><span class="num" th:text="${goodsTotalPrice+'.00'}">1299.00</span>元
                                         </td>
                                     </tr>
                                     </tbody>
@@ -140,6 +139,7 @@
                 </div>
             </div>
         </div>
+<!--        modal 模态对话框 -->
         <div class="modal fade" id="personalInfoModal" tabindex="-1" role="dialog"
              aria-labelledby="personalInfoModalLabel">
             <div class="modal-dialog" role="document">
@@ -152,10 +152,10 @@
                     <div class="modal-body">
                         <form id="personalInfoForm">
                             <div class="form-group">
-                                <input type="hidden" id="userId" th:value="${session.newBeeshopUser.userId}">
+                                <input type="hidden" id="userId" th:value="${session.LOGIN_SUCCESS_SESSION_KEY.userId}">
                                 <label for="address" class="control-label">收货地址:</label>
                                 <input type="text" class="form-control" id="address" name="address"
-                                       placeholder="请输入收货地址" th:value="${session.newBeeshopUser.address}"
+                                       placeholder="请输入收货地址" th:value="${session.LOGIN_SUCCESS_SESSION_KEY.address}"
                                        required="true">
                             </div>
                         </form>
@@ -172,7 +172,7 @@
 </div>
 
 
-<div th:replace="shop/footer::footer-fragment"></div>
+<div th:replace="shop/common/footer::footer-fragment"></div>
 
 <!-- jQuery -->
 <script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
@@ -212,18 +212,18 @@
             "address": address
         };
         $.ajax({
-            type: 'POST',//方法类型
-            url: '/personal/updateInfo',
+            type: 'PUT',//方法类型
+            url: '/user/address',
             contentType: 'application/json',
             data: JSON.stringify(data),
-            success: function (result) {
-                if (result.resultCode == 200) {
+            success: function (reponse) {
+                if (reponse.code == 20000) {
                     $('#personalInfoModal').modal('hide');
                     window.location.reload();
                 } else {
                     $('#personalInfoModal').modal('hide');
                     Swal.fire({
-                        text: result.message,
+                        text: reponse.msg,
                         icon: "error",iconColor:"#f05b72",
                     });
                 }

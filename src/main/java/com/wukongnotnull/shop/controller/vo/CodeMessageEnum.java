@@ -1,5 +1,7 @@
 package com.wukongnotnull.shop.controller.vo;
 
+import com.wukongnotnull.shop.common.ServiceResultEnum;
+
 /**
  * @author 悟空非空也
  */
@@ -14,7 +16,14 @@ public enum CodeMessageEnum {
     REGISTER_ERROR(21000,"REGISTER_ERROR"),
     PARAM_IS_NULL(22000,"PARAM_IS_NULL"),
     CAPTCHA_IS_ILLEGAL(23000,"CAPTCHA_IS_ILLEGAL"),
-    LOGIN_FAIL(24000,"LOGIN_FAIL" );
+    LOGIN_FAIL(24000,"LOGIN_FAIL" ),
+    ADD_FAIL(25000,"ADD_FAIL" ),
+    DELETE_FAIL(26000, "DELETE_FAIL"),
+    UPDATE_FAIL(27000, "UPDATE_FAIL"),
+    QUERY_FAIL(26000, "QUERY_FAIL"),
+    TEST_TEST(11111,"TEST_TEST")
+    ;
+
 
     private int code;
     private String msg;

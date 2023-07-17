@@ -5,16 +5,15 @@ import com.wukongnotnull.shop.common.IndexConfigTypeEnum;
 import com.wukongnotnull.shop.controller.vo.IndexCarouselVO;
 import com.wukongnotnull.shop.controller.vo.IndexCategoryVO;
 import com.wukongnotnull.shop.controller.vo.IndexGoodsVO;
-import com.wukongnotnull.shop.service.CarouselService;
-import com.wukongnotnull.shop.service.GoodsCategoryService;
-import com.wukongnotnull.shop.service.GoodsDetailService;
-import com.wukongnotnull.shop.service.IndexConfigService;
+import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
+import com.wukongnotnull.shop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -28,9 +27,11 @@ public class IndexController {
     private GoodsDetailService goodsDetailService;
     @Autowired
     private IndexConfigService indexConfigService;
+    @Autowired
+    private  CartItemService cartItemService;
 
     @GetMapping({"/","/index","index.html"})
-    public String index(Model model){
+    public String index(Model model, HttpSession httpSession){
         // 获得分栏侧边导航
         List<IndexCategoryVO> indexCategoryList = goodsCategoryService.getIndexCategoryNav();
         model.addAttribute("categories",indexCategoryList);
@@ -56,6 +57,14 @@ public class IndexController {
                 IndexConfigTypeEnum.INDEX_GOODS_RECOMMEND.getType(),
                 Constants.INDEX_MODULE_RECOMMEND_GOODS_NUM);
         model.addAttribute("recommendGoodses",newGoodsVOList);
+
+        // 更新首页购物车记录数的显示()
+        if (httpSession.getAttribute(Constants.LOGIN_SUCCESS_SESSION_KEY) != null) {
+            OrdinaryUserVO ordinaryUserVO = (OrdinaryUserVO) httpSession.getAttribute(Constants.LOGIN_SUCCESS_SESSION_KEY);
+            Integer cartItemCount = cartItemService.getCartItemCount(ordinaryUserVO.getUserId());
+            ordinaryUserVO.setCartItemCount(cartItemCount);
+            httpSession.setAttribute(Constants.LOGIN_SUCCESS_SESSION_KEY,ordinaryUserVO);
+        }
 
         return "shop/index";
     }

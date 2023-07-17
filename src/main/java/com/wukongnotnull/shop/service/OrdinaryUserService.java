@@ -28,4 +28,14 @@ public interface OrdinaryUserService extends IService<OrdinaryUser> {
      * @return String
      */
     String handleLogin(String loginName,String password, HttpSession httpSession);
+
+
+    /**
+     * 更新用户信息中的地址
+     * @param ordinaryUser ordinaryUser
+     * @param httpSession httpSession
+     * @return  String
+     */
+    String updateAddress(OrdinaryUser ordinaryUser,HttpSession httpSession);
+
 }

@@ -64,7 +64,7 @@ public class OrdinaryUser implements Serializable {
     /**
      * 创建人
      */
-    private Integer createBy;
+    private Long createBy;
 
     /**
      * 修改时间
@@ -74,7 +74,7 @@ public class OrdinaryUser implements Serializable {
     /**
      * 修改人
      */
-    private Integer updateBy;
+    private Long updateBy;
 
     /**
      * 当前版本

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="shop/common/header::head-fragment('wukong商城-商品详情','detail')">
+<head th:replace="shop/common/header::head-fragment('WuKong 商城-商品详情','detail')">
 </head>
 <body>
 <header th:replace="shop/common/header::header-fragment"></header>
@@ -92,8 +92,8 @@
             url: '/shop-cart',
             contentType: 'application/json',
             data: JSON.stringify(data),
-            success: function (result) {
-                if (result.resultCode == 200) {
+            success: function (response) {
+                if (response.code == 20000) {
                     Swal.fire({
                         title: "确认框",
                         text: "添加成功",
@@ -104,12 +104,13 @@
                     }).then((flag) => {
                            if (flag.value) {
                                 window.location.reload();
+                                //window.location.href="/";
                             }
                         }
                     );
                 } else {
                     Swal.fire({
-                        text: result.message,
+                        text: response.msg,
                         icon: "error",iconColor:"#f05b72",
                     });
                 }

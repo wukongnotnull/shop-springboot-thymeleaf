@@ -114,6 +114,40 @@
         </trim>
     </insert>
 
+    <update id="updateOrdinaryUser" parameterType="com.wukongnotnull.shop.domain.OrdinaryUser">
+        update shop_ordinary_user
+        <set>
+            <if test="nickName != null">
+                nick_name = #{nickName},
+            </if>
+            <if test="loginName != null">
+                login_name = #{loginName},
+            </if>
+            <if test="passwordMd5 != null">
+                password_md5 = #{passwordMd5},
+            </if>
+            <if test="introduceSign != null">
+                introduce_sign = #{introduceSign},
+            </if>
+            <if test="address != null">
+                address = #{address},
+            </if>
+            <if test="isDeleted !=null ">
+                is_deleted = #{isDeleted},
+            </if>
+            <if test="lockedFlag !=null">
+                locked_flag = #{lockedFlag},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="updateBy !=null">
+                update_by = #{updateBy},
+            </if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
     <select id="selectOrdinaryUser" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -121,4 +155,14 @@
         where login_name = #{loginName}
         and is_deleted = 0
     </select>
+
+    <select id="selectOrdinaryUserById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from shop_ordinary_user
+        where user_id = #{userId}
+        and is_deleted = 0
+    </select>
+
+
 </mapper>

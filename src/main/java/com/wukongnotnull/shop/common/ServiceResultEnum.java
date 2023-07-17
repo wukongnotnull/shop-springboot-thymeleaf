@@ -1,6 +1,5 @@
 package com.wukongnotnull.shop.common;
 
-import lombok.Data;
 
 /**
  * @author 悟空非空也

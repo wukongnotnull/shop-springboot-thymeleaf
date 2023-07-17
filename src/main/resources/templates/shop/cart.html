@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>NewBee商城-购物车</title>
+    <title>WuKong 商城-购物车</title>
     <link rel="stylesheet" th:href="@{shop/css/iconfont.css}">
     <link rel="stylesheet" th:href="@{shop/css/common.css}">
     <link rel="stylesheet" th:href="@{shop/styles/header.css}">
@@ -30,7 +30,7 @@
                 <img style="position: absolute;margin-top: 16px;left: 45%;" th:src="@{/shop/image/null-content.png}">
             </div>
         </th:block>
-<!--        后端数据不为空-->
+        <!--        后端数据不为空-->
         <th:block th:unless="${#lists.isEmpty(cartItemVOListPage)}">
             <div class="list center">
                 <div class="top2 center">
@@ -48,15 +48,20 @@
                         <div class="sub_content fl ">
                         </div>
                         <div class="sub_content cover fl"><img th:src="@{${item.goodsCoverImg}}"></div>
+                        <!--                        商品名称-->
                         <div class="sub_content fl ft20" th:text="${item.goodsName}">商品名称</div>
+                        <!--                        单价-->
                         <div class="sub_content fl" th:text="${item.sellingPrice+'元'}">1299元</div>
+                        <!--                       数量 -->
                         <div class="sub_content fl">
                             <input class="goods_count" th:id="${'goodsCount'+item.cartItemId}" type="number"
                                    th:onblur="'updateItem('+${item.cartItemId}+')'"
                                    th:value="${item.goodsCount}" step="1" min="1"
                                    max="5">
                         </div>
+                        <!--                       小计-->
                         <div class="sub_content fl" th:text="${item.goodsCount*item.sellingPrice+'元'}">1299元</div>
+                        <!--                        删除操作-->
                         <div class="sub_content fl"><a href="##" th:onclick="'deleteItem('+${item.cartItemId}+')'">×</a>
                         </div>
                         <div class="clear"></div>
@@ -108,15 +113,15 @@
     function tip() {
         Swal.fire({
             text: "购物车中无数据，无法结算",
-            icon: "error",iconColor:"#f05b72",
+            icon: "error", iconColor: "#f05b72",
         });
     }
 
     /**
-     * 跳转至结算页面
+     * 跳转至结算页面(订单核实页面)
      */
     function settle() {
-        window.location.href = '/shop-cart/settle'
+        window.location.href = '/shop-cart/order-settle'
     }
 
     /**
@@ -128,14 +133,14 @@
         if (goodsCount > 5) {
             Swal.fire({
                 text: "单个商品最多可购买5个",
-                icon: "error",iconColor:"#f05b72",
+                icon: "error", iconColor: "#f05b72",
             });
             return;
         }
         if (goodsCount < 1) {
             Swal.fire({
                 text: "数量异常",
-                icon: "error",iconColor:"#f05b72",
+                icon: "error", iconColor: "#f05b72",
             });
             return;
         }
@@ -149,19 +154,19 @@
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function (result) {
-                if (result.resultCode == 200) {
+                if (result.code == 20000) {
                     window.location.reload();
                 } else {
                     Swal.fire({
                         text: "操作失败",
-                        icon: "error",iconColor:"#f05b72",
+                        icon: "error", iconColor: "#f05b72",
                     });
                 }
             },
             error: function () {
                 Swal.fire({
                     text: "操作失败",
-                    icon: "error",iconColor:"#f05b72",
+                    icon: "error", iconColor: "#f05b72",
                 });
             }
         });
@@ -175,7 +180,7 @@
         Swal.fire({
             title: "确认弹框",
             text: "确认要删除数据吗?",
-            icon: "warning",iconColor:"#dea32c",
+            icon: "warning", iconColor: "#dea32c",
             showCancelButton: true,
             confirmButtonText: '确认',
             cancelButtonText: '取消'
@@ -184,20 +189,20 @@
                     $.ajax({
                         type: 'DELETE',
                         url: '/shop-cart/' + id,
-                        success: function (result) {
-                            if (result.resultCode == 200) {
+                        success: function (response) {
+                            if (response.code == 20000) {
                                 window.location.reload();
                             } else {
                                 Swal.fire({
                                     text: "操作失败",
-                                    icon: "error",iconColor:"#f05b72",
+                                    icon: "error", iconColor: "#f05b72",
                                 });
                             }
                         },
                         error: function () {
                             Swal.fire({
                                 text: "操作失败",
-                                icon: "error",iconColor:"#f05b72",
+                                icon: "error", iconColor: "#f05b72",
                             });
                         }
                     });

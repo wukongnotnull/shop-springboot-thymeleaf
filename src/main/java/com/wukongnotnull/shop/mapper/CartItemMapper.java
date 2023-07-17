@@ -10,7 +10,6 @@ import java.util.List;
 /**
 * @author 悟空非空也
 * @description 针对表【shop_cart_item】的数据库操作Mapper
-* @Entity com.wukongnotnull.shop.domain.CartItem  购物车明细表
 */
 @Mapper
 public interface CartItemMapper extends BaseMapper<CartItem> {
@@ -32,6 +31,29 @@ public interface CartItemMapper extends BaseMapper<CartItem> {
     List<CartItem> selectCartItemListPage(@Param("userId") Long userId,
                                           @Param("pageIndex") Integer pageIndex,
                                           @Param("pageSize") Integer pageSize);
+
+
+    /**
+     *  插入购物车明细记录一条
+     * @param cartItem
+     * @return
+     */
+    int insertCartItem(CartItem cartItem);
+
+    /**
+     * 根据购物车记录id 删除该记录
+     * 本质是：假删除，实质是修改
+     * @param cartItemId cartItemId
+     * @return int
+     */
+    int deleteCartItem(@Param("cartItemId") Long cartItemId);
+
+    /**
+     * 修改购物车记录中的商品数量
+     * @param cartItem cartItem
+     * @return int
+     */
+    int updateCartItem(CartItem cartItem);
 }
 
 

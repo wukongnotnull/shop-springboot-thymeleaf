@@ -5,6 +5,8 @@ import com.wukongnotnull.shop.common.Constants;
 import com.wukongnotnull.shop.common.ServiceResultEnum;
 import com.wukongnotnull.shop.controller.vo.CodeMessageEnum;
 import com.wukongnotnull.shop.controller.vo.HttpResponseResult;
+import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
+import com.wukongnotnull.shop.domain.OrdinaryUser;
 import com.wukongnotnull.shop.service.OrdinaryUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * @author 悟空非空也
@@ -24,6 +27,22 @@ import java.io.IOException;
 public class OrdinaryUserController {
     @Autowired
     private OrdinaryUserService ordinaryUserService;
+
+    /**
+     * 修改用户的地址
+     *
+     */
+    @PutMapping(value = "/user/address")
+    @ResponseBody
+    public HttpResponseResult<Object> updateAddress(@RequestBody OrdinaryUser ordinaryUser,
+                                                    HttpSession httpSession
+                                                    ){
+        String result = ordinaryUserService.updateAddress(ordinaryUser,httpSession);
+        if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
+            return HttpResponseResult.success();
+        }
+        return  HttpResponseResult.fail(CodeMessageEnum.UPDATE_FAIL);
+    }
 
     /**
      * 进行退出操作

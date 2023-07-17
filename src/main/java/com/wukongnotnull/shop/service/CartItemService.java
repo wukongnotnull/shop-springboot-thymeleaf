@@ -4,11 +4,11 @@ import com.wukongnotnull.shop.controller.vo.CartItemVO;
 import com.wukongnotnull.shop.domain.CartItem;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
-* @author wukong
-* @description 针对表【shop_cart_item】的数据库操作Service
+* @author 悟空非空也
 */
 public interface CartItemService extends IService<CartItem> {
 
@@ -21,4 +21,32 @@ public interface CartItemService extends IService<CartItem> {
      * @return List<CartItemVO>
      */
     List<CartItemVO> findCartItemListPage(Long userId,Integer pageNo,Integer pageSize);
+
+    /**
+     * 某用户添加购物车明细记录
+     * @param cartItem    cartItem
+     * @return String
+     */
+    String addCartItem(CartItem cartItem);
+
+    /**
+     * 查询指定用户名下的购物车记录数
+     * @param userId userId
+     * @return Integer
+     */
+    Integer getCartItemCount(Long userId);
+
+    /**
+     * 根据购物车记录id 删除该记录
+     * @param cartItemId cartItemId
+     * @return String
+     */
+    String deleteCartItem(Long cartItemId);
+
+    /**
+     * 修改购物车记录中的商品数量
+     * @param cartItem cartItem
+     * @return String
+     */
+    String updateCartItem(CartItem cartItem);
 }
