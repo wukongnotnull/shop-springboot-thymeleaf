@@ -2,13 +2,11 @@ package com.wukongnotnull.shop.controller.shop;
 
 import com.wukongnotnull.shop.common.Constants;
 import com.wukongnotnull.shop.common.ServiceResultEnum;
-import com.wukongnotnull.shop.controller.vo.CartItemVO;
-import com.wukongnotnull.shop.controller.vo.CodeMessageEnum;
-import com.wukongnotnull.shop.controller.vo.HttpResponseResult;
-import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
+import com.wukongnotnull.shop.vo.CartItemVO;
+import com.wukongnotnull.shop.vo.CodeMessageEnum;
+import com.wukongnotnull.shop.vo.HttpResponseResult;
+import com.wukongnotnull.shop.vo.OrdinaryUserVO;
 import com.wukongnotnull.shop.domain.CartItem;
-import com.wukongnotnull.shop.domain.GoodsDetail;
-import com.wukongnotnull.shop.domain.OrdinaryUser;
 import com.wukongnotnull.shop.service.CartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,18 +33,16 @@ public class CartItemController {
         // 获得购物车明细vo列表
         // 查询指定用户下的购物车明细记录
         OrdinaryUserVO ordinaryUserVO = (OrdinaryUserVO) httpSession.getAttribute(Constants.LOGIN_SUCCESS_SESSION_KEY);
-        List<CartItemVO> cartItemVOListPage = null;
+        List<CartItemVO> cartItemVOList = null;
         int goodsTotalPrice = 0;
         int goodsTotalCount = 0;
-        List<CartItemVO> cartItemVOListAll =null;
         if(ordinaryUserVO != null) {
             // 分页查询
-            cartItemVOListPage = cartItemService.findCartItemListPage(ordinaryUserVO.getUserId(), 1, 10);
+            cartItemVOList = cartItemService.findCartItemList(ordinaryUserVO.getUserId());
             // 统计指定用户下购物车中商品总数
             // 统计指定用户下购物车中总价
-            cartItemVOListAll = cartItemService.findCartItemListPage(ordinaryUserVO.getUserId(), 1, 100);
 
-            for(CartItemVO cartItemVO: cartItemVOListAll){
+            for(CartItemVO cartItemVO: cartItemVOList){
                 goodsTotalPrice += cartItemVO.getSellingPrice() * cartItemVO.getGoodsCount();
                 goodsTotalCount += cartItemVO.getGoodsCount();
             }
@@ -54,7 +50,7 @@ public class CartItemController {
 
 
         // model 返回数据给页面
-        model.addAttribute("cartItemVOListPage",cartItemVOListPage);
+        model.addAttribute("cartItemVOListPage",cartItemVOList);
         model.addAttribute("goodsTotalCount",goodsTotalCount);
         model.addAttribute("goodsTotalPrice",goodsTotalPrice);
 
@@ -122,27 +118,23 @@ public class CartItemController {
     }
 
     /**
-     * 查看指定用户下的购物车记录情况(分页呈现)
+     * 查看指定用户下的购物车记录情况
      * @return
      */
     @GetMapping("/shop-cart")
-    public String getCartItemListPage(HttpSession httpSession,
-                                      Model model,
-                                      @RequestParam(value = "pageNo",required = false,defaultValue = "1")  Integer pageNo,
-                                      @RequestParam(value = "pageSize",required = false,defaultValue = "10") Integer pageSize){
+    public String getCartItemList(HttpSession httpSession,
+                                      Model model
+                                     ){
         // 查询指定用户下的购物车明细记录
         OrdinaryUserVO ordinaryUserVO = (OrdinaryUserVO) httpSession.getAttribute(Constants.LOGIN_SUCCESS_SESSION_KEY);
-        List<CartItemVO> cartItemVOListPage = null;
+        List<CartItemVO> cartItemVOList = null;
         int goodsTotalPrice = 0;
         int goodsTotalCount = 0;
-        List<CartItemVO> cartItemVOListAll =null;
         if(ordinaryUserVO != null) {
-            cartItemVOListPage = cartItemService.findCartItemListPage(ordinaryUserVO.getUserId(), pageNo, pageSize);
+            cartItemVOList = cartItemService.findCartItemList(ordinaryUserVO.getUserId());
             // 统计指定用户下购物车中商品总数
             // 统计指定用户下购物车中总价
-            cartItemVOListAll = cartItemService.findCartItemListPage(ordinaryUserVO.getUserId(), 1, 100);
-
-            for(CartItemVO cartItemVO: cartItemVOListAll){
+            for(CartItemVO cartItemVO: cartItemVOList){
                 goodsTotalPrice += cartItemVO.getSellingPrice() * cartItemVO.getGoodsCount();
                 goodsTotalCount += cartItemVO.getGoodsCount();
             }
@@ -150,7 +142,7 @@ public class CartItemController {
 
 
         // model 返回数据给页面
-        model.addAttribute("cartItemVOListPage",cartItemVOListPage);
+        model.addAttribute("cartItemVOListPage",cartItemVOList);
         model.addAttribute("goodsTotalCount",goodsTotalCount);
         model.addAttribute("goodsTotalPrice",goodsTotalPrice);
 

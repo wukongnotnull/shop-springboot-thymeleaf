@@ -1,8 +1,6 @@
-package com.wukongnotnull.shop.controller.vo;
+package com.wukongnotnull.shop.vo;
 
 import lombok.Data;
-
-import java.util.List;
 
 /**
  * @author 悟空非空也

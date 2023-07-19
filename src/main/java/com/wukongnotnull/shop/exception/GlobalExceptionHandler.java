@@ -1,8 +1,8 @@
 package com.wukongnotnull.shop.exception;
 
 
-import com.wukongnotnull.shop.controller.vo.CodeMessageEnum;
-import com.wukongnotnull.shop.controller.vo.HttpResponseResult;
+import com.wukongnotnull.shop.vo.CodeMessageEnum;
+import com.wukongnotnull.shop.vo.HttpResponseResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;

@@ -3,7 +3,7 @@ package com.wukongnotnull.shop.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wukongnotnull.shop.common.Constants;
 import com.wukongnotnull.shop.common.ServiceResultEnum;
-import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
+import com.wukongnotnull.shop.vo.OrdinaryUserVO;
 import com.wukongnotnull.shop.domain.OrdinaryUser;
 import com.wukongnotnull.shop.service.CartItemService;
 import com.wukongnotnull.shop.service.OrdinaryUserService;

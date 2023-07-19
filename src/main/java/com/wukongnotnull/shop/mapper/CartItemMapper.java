@@ -22,15 +22,11 @@ public interface CartItemMapper extends BaseMapper<CartItem> {
     Integer selectCartItemCount(@Param("userId") Long userId);
 
     /**
-     * 查询指定用户下的购物车明细记录列表（分页）
+     * 查询指定用户下的购物车明细记录列表
      * @param userId  userId
-     * @param pageIndex 记录索引，从 0 开始
-     * @param pageSize 页容量
      * @return List<CartItem>
      */
-    List<CartItem> selectCartItemListPage(@Param("userId") Long userId,
-                                          @Param("pageIndex") Integer pageIndex,
-                                          @Param("pageSize") Integer pageSize);
+    List<CartItem> selectCartItemList(@Param("userId") Long userId);
 
 
     /**

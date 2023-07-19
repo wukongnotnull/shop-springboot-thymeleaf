@@ -1,6 +1,6 @@
 package com.wukongnotnull.shop.service;
 
-import com.wukongnotnull.shop.controller.vo.IndexCategoryVO;
+import com.wukongnotnull.shop.vo.IndexCategoryVO;
 import com.wukongnotnull.shop.domain.GoodsCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
 

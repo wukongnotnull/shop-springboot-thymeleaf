@@ -1,6 +1,6 @@
 package com.wukongnotnull.shop.service;
 
-import com.wukongnotnull.shop.controller.vo.IndexCarouselVO;
+import com.wukongnotnull.shop.vo.IndexCarouselVO;
 import com.wukongnotnull.shop.domain.Carousel;
 import com.baomidou.mybatisplus.extension.service.IService;
 

@@ -1,13 +1,12 @@
 package com.wukongnotnull.shop.service;
 
-import com.wukongnotnull.shop.controller.vo.IndexCategoryVO;
+import com.wukongnotnull.shop.vo.IndexCategoryVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class GoodsCategoryServiceTest {
 

@@ -1,4 +1,4 @@
-package com.wukongnotnull.shop.controller.vo;
+package com.wukongnotnull.shop.vo;
 
 import com.wukongnotnull.shop.common.ServiceResultEnum;
 

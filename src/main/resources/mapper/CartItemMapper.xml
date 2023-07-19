@@ -87,14 +87,13 @@
         and is_deleted = 0
     </select>
 
-    <select id="selectCartItemListPage" resultMap="BaseResultMap">
+    <select id="selectCartItemList" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from shop_cart_item
         where user_id = #{userId}
         and is_deleted = 0
         order by create_time desc
-        limit #{pageIndex} ,#{pageSize}
 
     </select>
 </mapper>

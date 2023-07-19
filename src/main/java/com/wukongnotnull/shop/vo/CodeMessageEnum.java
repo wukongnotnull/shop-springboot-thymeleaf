@@ -1,6 +1,4 @@
-package com.wukongnotnull.shop.controller.vo;
-
-import com.wukongnotnull.shop.common.ServiceResultEnum;
+package com.wukongnotnull.shop.vo;
 
 /**
  * @author 悟空非空也

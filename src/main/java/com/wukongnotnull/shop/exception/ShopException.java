@@ -10,7 +10,7 @@ public class ShopException extends  RuntimeException {
         super();
     }
 
-    private ShopException(String  msg){
+    private ShopException(String msg){
         super(msg);
     }
 

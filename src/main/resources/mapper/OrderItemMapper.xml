@@ -20,4 +20,15 @@
         goods_name,goods_cover_img,selling_price,
         goods_count,create_time
     </sql>
+
+    <insert id="insertBatch" parameterType="com.wukongnotnull.shop.bo.CartItemBO">
+        insert into shop_order_item
+        (order_id,goods_id,goods_name,goods_cover_img,selling_price,goods_count)
+        values
+        <foreach collection="cartItemBOList" item="cartItemBO"  separator=",">
+            (#{cartItemBO.orderId},#{cartItemBO.goodsId},#{cartItemBO.goodsName},#{cartItemBO.goodsCoverImg},
+               #{cartItemBO.sellingPrice},#{cartItemBO.goodsCount})
+        </foreach>
+
+    </insert>
 </mapper>

@@ -1,6 +1,6 @@
 package com.wukongnotnull.shop.service;
 
-import com.wukongnotnull.shop.controller.vo.CartItemVO;
+import com.wukongnotnull.shop.vo.CartItemVO;
 import com.wukongnotnull.shop.domain.CartItem;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class CartItemServiceTest {
     @Autowired
@@ -26,7 +25,7 @@ class CartItemServiceTest {
 
     @Test
     void findCartItemListPage() {
-        List<CartItemVO> cartItemListPage = cartItemService.findCartItemListPage(11L, 1, 2);
+        List<CartItemVO> cartItemListPage = cartItemService.findCartItemList(11L);
         System.out.println("cartItemListPage = " + cartItemListPage);
     }
 }

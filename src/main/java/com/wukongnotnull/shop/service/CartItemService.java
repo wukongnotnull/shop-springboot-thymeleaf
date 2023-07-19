@@ -1,10 +1,9 @@
 package com.wukongnotnull.shop.service;
 
-import com.wukongnotnull.shop.controller.vo.CartItemVO;
+import com.wukongnotnull.shop.vo.CartItemVO;
 import com.wukongnotnull.shop.domain.CartItem;
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -13,14 +12,12 @@ import java.util.List;
 public interface CartItemService extends IService<CartItem> {
 
     /**
-     * 查询指定用户下的购物车明细记录列表（分页）
+     * 查询指定用户下的购物车明细记录列表
      *
      * @param userId userId
-     * @param pageNo 当前页码
-     * @param pageSize  页容量
      * @return List<CartItemVO>
      */
-    List<CartItemVO> findCartItemListPage(Long userId,Integer pageNo,Integer pageSize);
+    List<CartItemVO> findCartItemList(Long userId);
 
     /**
      * 某用户添加购物车明细记录

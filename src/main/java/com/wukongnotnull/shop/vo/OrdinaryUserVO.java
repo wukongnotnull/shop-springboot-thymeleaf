@@ -1,4 +1,4 @@
-package com.wukongnotnull.shop.controller.vo;
+package com.wukongnotnull.shop.vo;
 
 import lombok.Data;
 
@@ -21,6 +21,21 @@ public class OrdinaryUserVO implements Serializable {
     private String address;
 
     private Integer cartItemCount;
+
+    /**
+     *  商品总数量
+     */
+    private Integer totalNum;
+
+    /**
+     * 商品总价格
+     */
+    private Integer totalPrice;
+
+    /**
+     * 手机号
+     */
+    private String phone;
 
 
 }
