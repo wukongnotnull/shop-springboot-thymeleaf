@@ -1,4 +1,4 @@
-package com.wukongnotnull.shop.bo;
+package com.wukongnotnull.shop.service.bo;
 
 import lombok.Data;
 

@@ -17,6 +17,28 @@ public enum OrderStatusEnum {
     private int orderStatus;
     private String name;
 
+    public static String getOrderStatusName(Integer orderStatus) {
+        switch (orderStatus) {
+            case -3:
+                return OrderStatusEnum.SELLER_CLOSE.getName();
+            case -2:
+                return OrderStatusEnum.OVERTIME_CLOSE.getName();
+            case -1:
+                return OrderStatusEnum.MANUAL_CLOSE.getName();
+            case 0:
+                return OrderStatusEnum.READY_PAY.getName();
+            case 1:
+                return OrderStatusEnum.HAVE_PAID.getName();
+            case 2:
+                return OrderStatusEnum.DISTRIBUTION_COMPLETED.getName();
+            case 3:
+                return OrderStatusEnum.DELIVERY_SUCCESS.getName();
+            case 4:
+                return OrderStatusEnum.TRANSACTION_SUCCESS.getName();
+        }
+        return null;
+    }
+
     OrderStatusEnum(int orderStatus, String name) {
         this.orderStatus = orderStatus;
         this.name = name;

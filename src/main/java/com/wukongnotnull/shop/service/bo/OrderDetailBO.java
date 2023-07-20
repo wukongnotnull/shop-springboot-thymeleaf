@@ -1,24 +1,21 @@
-package com.wukongnotnull.shop.domain;
+package com.wukongnotnull.shop.service.bo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.util.Date;
+import com.wukongnotnull.shop.domain.OrderItem;
 import lombok.Data;
 
+import java.util.Date;
+import java.util.List;
+
 /**
- * 
- * @TableName shop_order
+ * @author 悟空非空也
+ * 该业务类 是 shop_order 和 shop_order_item 的合并体  1 对 多 的关系
  */
-@TableName(value ="shop_order")
 @Data
-public class Order implements Serializable {
+public class OrderDetailBO {
+
     /**
      * 订单表主键id
      */
-    @TableId(type = IdType.AUTO)
     private Long orderId;
 
     /**
@@ -81,16 +78,10 @@ public class Order implements Serializable {
      */
     private Integer isDeleted;
 
-    /**
-     * 创建时间
-     */
-    private Date createTime;
 
-    /**
-     * 最新修改时间
-     */
-    private Date updateTime;
+    private List<OrderItem> orderItemList;
 
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
+
+    private  Date createTime;
+
 }

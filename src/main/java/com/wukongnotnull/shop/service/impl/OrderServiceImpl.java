@@ -1,17 +1,17 @@
 package com.wukongnotnull.shop.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.wukongnotnull.shop.bo.CartItemBO;
-import com.wukongnotnull.shop.bo.OrderDetailBO;
+import com.wukongnotnull.shop.service.bo.CartItemBO;
+import com.wukongnotnull.shop.service.bo.OrderDetailBO;
 import com.wukongnotnull.shop.common.OrderStatusEnum;
 import com.wukongnotnull.shop.common.PayStatusEnum;
-import com.wukongnotnull.shop.common.PayTypeEnum;
+import com.wukongnotnull.shop.common.PayMethodEnum;
 import com.wukongnotnull.shop.domain.GoodsDetail;
 import com.wukongnotnull.shop.domain.OrderItem;
 import com.wukongnotnull.shop.exception.ShopException;
 import com.wukongnotnull.shop.mapper.GoodsDetailMapper;
 import com.wukongnotnull.shop.util.BeanUtil;
-import com.wukongnotnull.shop.vo.OrdinaryUserVO;
+import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
 import com.wukongnotnull.shop.domain.CartItem;
 import com.wukongnotnull.shop.domain.Order;
 import com.wukongnotnull.shop.mapper.CartItemMapper;
@@ -25,7 +25,6 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author wukong
@@ -68,7 +67,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
         order.setPayStatus(PayStatusEnum.PAY_READY.getPayStatus());
 
         // 支付方式
-        order.setPayType(PayTypeEnum.NO_TYPE_PAY.getPayType());
+        order.setPayMethod(PayMethodEnum.NO_TYPE_PAY.getPayMethod());
 
         // 支付时间
         order.setPayTime(new Date());
@@ -135,7 +134,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
         BeanUtil.copyProperties(order,orderDetailBO);
         List<OrderItem> orderItemList = orderItemMapper.selectOrderItems(order.getOrderId());
         orderDetailBO.setOrderItemList(orderItemList);
-
         return orderDetailBO;
     }
 }

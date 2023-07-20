@@ -2,7 +2,7 @@ package com.wukongnotnull.shop.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wukongnotnull.shop.common.Constants;
-import com.wukongnotnull.shop.vo.IndexCarouselVO;
+import com.wukongnotnull.shop.controller.vo.IndexCarouselVO;
 import com.wukongnotnull.shop.domain.Carousel;
 import com.wukongnotnull.shop.service.CarouselService;
 import com.wukongnotnull.shop.mapper.CarouselMapper;

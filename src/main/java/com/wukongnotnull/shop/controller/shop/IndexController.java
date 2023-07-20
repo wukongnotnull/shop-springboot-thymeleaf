@@ -2,10 +2,10 @@ package com.wukongnotnull.shop.controller.shop;
 
 import com.wukongnotnull.shop.common.Constants;
 import com.wukongnotnull.shop.common.IndexConfigTypeEnum;
-import com.wukongnotnull.shop.vo.IndexCarouselVO;
-import com.wukongnotnull.shop.vo.IndexCategoryVO;
-import com.wukongnotnull.shop.vo.IndexGoodsVO;
-import com.wukongnotnull.shop.vo.OrdinaryUserVO;
+import com.wukongnotnull.shop.controller.vo.IndexCarouselVO;
+import com.wukongnotnull.shop.controller.vo.IndexCategoryVO;
+import com.wukongnotnull.shop.controller.vo.IndexGoodsVO;
+import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
 import com.wukongnotnull.shop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

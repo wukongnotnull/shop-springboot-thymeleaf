@@ -1,7 +1,6 @@
 package com.wukongnotnull.shop.mapper;
 
-import com.wukongnotnull.shop.bo.CartItemBO;
-import com.wukongnotnull.shop.domain.CartItem;
+import com.wukongnotnull.shop.service.bo.CartItemBO;
 import com.wukongnotnull.shop.domain.OrderItem;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,7 +20,12 @@ public interface OrderItemMapper extends BaseMapper<OrderItem> {
      */
     int insertBatch(@Param("cartItemBOList") List<CartItemBO> cartItemBOList);
 
-
+    /**
+     *  根据订单id 查询订单快照记录列表
+     * @param orderId orderId
+     * @return  List<OrderItem>
+     */
+    List<OrderItem> selectOrderItems(@Param("orderId") Long orderId);
 }
 
 

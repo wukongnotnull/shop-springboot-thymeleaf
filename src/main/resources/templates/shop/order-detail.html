@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="shop/header::head-fragment('WuKong 商城-订单详情','order-detail')">
+<head th:replace="shop/common/header::head-fragment('WuKong 商城-订单详情','order-detail')">
 </head>
 <link rel="stylesheet" th:href="@{/admin/plugins/sweetalert2/sweetalert2.min.css}"/>
 <body>
@@ -51,11 +51,11 @@
 
                                 <div class="order-summary">
                                     <div class="order-status" th:text="${orderDetailVO.orderStatusString}">
-                                        newbee
+                                        WuKong
                                     </div>
                                     <div class="order-desc">
                                         <th:block th:if="${orderDetailVO.orderStatus==0}">请尽快完成支付哦~</th:block>
-                                        <th:block th:if="${orderDetailVO.orderStatus==1}">newbee商城订单确认中~</th:block>
+                                        <th:block th:if="${orderDetailVO.orderStatus==1}">商城订单确认中~</th:block>
                                         <th:block th:if="${orderDetailVO.orderStatus==2}">newbee仓库正在紧急配货中~</th:block>
                                         <th:block th:if="${orderDetailVO.orderStatus==3}">订单已出库正在快马加鞭向您奔来~</th:block>
                                         <th:block th:if="${orderDetailVO.orderStatus==4}">交易成功，感谢您对newbee商城的支持~
@@ -132,7 +132,7 @@
                                 </div>
                                 <table class="order-items-table">
                                     <tbody>
-                                    <th:block th:each="item : ${orderDetailVO.newBeeshopOrderItemVOS}">
+                                    <th:block th:each="item : ${orderDetailVO.OrderItemList}">
                                         <tr>
                                             <td class="col col-thumb">
                                                 <div class="figure figure-thumb">
@@ -163,7 +163,7 @@
                                 <table class="info-table">
                                     <tbody>
                                     <tr>
-                                        <td th:text="${orderDetailVO.userAddress}">newbee</td>
+                                        <td th:text="${orderDetailVO.userAddress}">wukong</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -176,7 +176,7 @@
                                     <tbody>
                                     <tr>
                                         <th>支付方式：</th>
-                                        <td th:text="${orderDetailVO.payTypeString==null?'在线支付':orderDetailVO.payTypeString}">
+                                        <td th:text="${orderDetailVO.payMethodString ==null?'在线支付':orderDetailVO.payMethodString}">
                                             在线支付
                                         </td>
                                     </tr>
@@ -230,12 +230,12 @@
                     $.ajax({
                         type: 'PUT',
                         url: '/orders/' + orderNo + '/cancel',
-                        success: function (result) {
-                            if (result.resultCode == 200) {
+                        success: function (response) {
+                            if (response.code == 20000) {
                                 window.location.reload();
                             } else {
                                 Swal.fire({
-                                    text: result.message,
+                                    text: response.msg,
                                     icon: "error",iconColor:"#f05b72",
                                 });
                             }
@@ -255,7 +255,7 @@
 
     function payOrder() {
         var orderNo = $("#orderNoValue").val();
-        window.location.href = '/selectPayType?orderNo=' + orderNo;
+        window.location.href = '/select/payMethod?orderNo=' + orderNo;
     }
 
     function finishOrder() {

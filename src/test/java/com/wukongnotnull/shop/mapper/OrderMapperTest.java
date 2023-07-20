@@ -17,7 +17,10 @@ class OrderMapperTest {
     @Test
     void insertOrder() {
         Order order = new Order();
-        order.setUserName("wukong2");
+        order.setUserName("wukong3");
+        order.setOrderNo("23331523");
+        order.setUserId(11l);
+        order.setTotalPrice(1223);
         int i = orderMapper.insertOrder(order);
         System.out.println("i = " + i);
         // sqlxml 文件上添加了 useGeneratedkeys = "true" 属性 ,添加的实例，返回主键的值

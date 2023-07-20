@@ -1,6 +1,6 @@
 package com.wukongnotnull.shop.service;
 
-import com.wukongnotnull.shop.vo.IndexCarouselVO;
+import com.wukongnotnull.shop.controller.vo.IndexCarouselVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

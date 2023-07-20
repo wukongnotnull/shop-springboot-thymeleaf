@@ -1,4 +1,4 @@
-package com.wukongnotnull.shop.bo;
+package com.wukongnotnull.shop.controller.vo;
 
 import com.wukongnotnull.shop.domain.OrderItem;
 import lombok.Data;
@@ -11,7 +11,7 @@ import java.util.List;
  * 该业务类 是 shop_order 和 shop_order_item 的合并体  1 对 多 的关系
  */
 @Data
-public class OrderDetailBO {
+public class OrderDetailVO {
 
     /**
      * 订单表主键id
@@ -39,9 +39,19 @@ public class OrderDetailBO {
     private Integer payStatus;
 
     /**
+     * 支付状态:0.未支付,1.支付成功,-1:支付失败
+     */
+    private String payStatusString;
+
+    /**
      * 0.无 1.支付宝支付 2.微信支付
      */
-    private Integer payType;
+    private Integer payMethod;
+
+    /**
+     * 0.无 1.支付宝支付 2.微信支付
+     */
+    private String payMethodString;
 
     /**
      * 支付时间
@@ -52,6 +62,11 @@ public class OrderDetailBO {
      * 订单状态:0.待支付 1.已支付 2.配货完成 3:出库成功 4.交易成功 -1.手动关闭 -2.超时关闭 -3.商家关闭
      */
     private Integer orderStatus;
+
+    /**
+     * 订单状态:0.待支付 1.已支付 2.配货完成 3:出库成功 4.交易成功 -1.手动关闭 -2.超时关闭 -3.商家关闭
+     */
+    private String orderStatusString;
 
     /**
      * 订单body
@@ -80,5 +95,8 @@ public class OrderDetailBO {
 
 
     private List<OrderItem> orderItemList;
+
+
+    private  Date createTime;
 
 }

@@ -1,6 +1,6 @@
 package com.wukongnotnull.shop.service;
 
-import com.wukongnotnull.shop.vo.CartItemVO;
+import com.wukongnotnull.shop.controller.vo.CartItemVO;
 import com.wukongnotnull.shop.domain.CartItem;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

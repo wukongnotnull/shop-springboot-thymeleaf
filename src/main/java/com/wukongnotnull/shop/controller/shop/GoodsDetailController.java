@@ -1,8 +1,8 @@
 package com.wukongnotnull.shop.controller.shop;
 
 import com.wukongnotnull.shop.common.Constants;
-import com.wukongnotnull.shop.vo.GoodsDetailVO;
-import com.wukongnotnull.shop.vo.OrdinaryUserVO;
+import com.wukongnotnull.shop.controller.vo.GoodsDetailVO;
+import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
 import com.wukongnotnull.shop.exception.ParamsException;
 import com.wukongnotnull.shop.exception.ShopException;
 import com.wukongnotnull.shop.service.CartItemService;

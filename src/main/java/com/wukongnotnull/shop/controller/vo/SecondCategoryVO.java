@@ -1,17 +1,20 @@
-package com.wukongnotnull.shop.vo;
+package com.wukongnotnull.shop.controller.vo;
 
 import lombok.Data;
 
 import java.io.Serializable;
-
+import java.util.List;
 /**
  * @author 悟空非空也
  */
 @Data
-public class ThirdCategoryVO implements Serializable {
+public class SecondCategoryVO  implements Serializable {
 
     private Long categoryId;
     private  Long parentId;
     private Long categoryLevel;
     private  String categoryName;
+    private List<ThirdCategoryVO> thirdCategoryVOList;
+
+
 }

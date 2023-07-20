@@ -1,4 +1,4 @@
-package com.wukongnotnull.shop.vo;
+package com.wukongnotnull.shop.controller.vo;
 
 /**
  * @author 悟空非空也

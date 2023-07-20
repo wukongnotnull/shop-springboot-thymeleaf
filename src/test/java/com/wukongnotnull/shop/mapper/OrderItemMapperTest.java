@@ -1,6 +1,7 @@
 package com.wukongnotnull.shop.mapper;
 
-import com.wukongnotnull.shop.bo.CartItemBO;
+import com.wukongnotnull.shop.service.bo.CartItemBO;
+import com.wukongnotnull.shop.domain.OrderItem;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -9,11 +10,17 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class OrderItemMapperTest {
     @Resource
     private OrderItemMapper orderItemMapper;
+
+    @Test
+    void selectOrderItems(){
+        Long orderId = 9L;
+        List<OrderItem> orderItems = orderItemMapper.selectOrderItems(orderId);
+        System.out.println("orderItems = " + orderItems);
+    }
 
     @Test
     void insertBatch() {

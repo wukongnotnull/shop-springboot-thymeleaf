@@ -1,7 +1,7 @@
 package com.wukongnotnull.shop.service;
 
-import com.wukongnotnull.shop.bo.OrderDetailBO;
-import com.wukongnotnull.shop.vo.OrdinaryUserVO;
+import com.wukongnotnull.shop.service.bo.OrderDetailBO;
+import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
 import com.wukongnotnull.shop.domain.Order;
 import com.baomidou.mybatisplus.extension.service.IService;
 

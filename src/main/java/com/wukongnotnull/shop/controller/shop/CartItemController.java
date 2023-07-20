@@ -2,10 +2,10 @@ package com.wukongnotnull.shop.controller.shop;
 
 import com.wukongnotnull.shop.common.Constants;
 import com.wukongnotnull.shop.common.ServiceResultEnum;
-import com.wukongnotnull.shop.vo.CartItemVO;
-import com.wukongnotnull.shop.vo.CodeMessageEnum;
-import com.wukongnotnull.shop.vo.HttpResponseResult;
-import com.wukongnotnull.shop.vo.OrdinaryUserVO;
+import com.wukongnotnull.shop.controller.vo.CartItemVO;
+import com.wukongnotnull.shop.controller.vo.CodeMessageEnum;
+import com.wukongnotnull.shop.controller.vo.HttpResponseResult;
+import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
 import com.wukongnotnull.shop.domain.CartItem;
 import com.wukongnotnull.shop.service.CartItemService;
 import org.springframework.beans.factory.annotation.Autowired;

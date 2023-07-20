@@ -10,7 +10,7 @@
             <result property="userId" column="user_id" jdbcType="BIGINT"/>
             <result property="totalPrice" column="total_price" jdbcType="INTEGER"/>
             <result property="payStatus" column="pay_status" jdbcType="TINYINT"/>
-            <result property="payType" column="pay_type" jdbcType="TINYINT"/>
+            <result property="payMethod" column="pay_method" jdbcType="TINYINT"/>
             <result property="payTime" column="pay_time" jdbcType="TIMESTAMP"/>
             <result property="orderStatus" column="order_status" jdbcType="TINYINT"/>
             <result property="extraInfo" column="extra_info" jdbcType="VARCHAR"/>
@@ -24,7 +24,7 @@
 
     <sql id="Base_Column_List">
         order_id,order_no,user_id,
-        total_price,pay_status,pay_type,
+        total_price,pay_status,pay_method,
         pay_time,order_status,extra_info,
         user_name,user_phone,user_address,
         is_deleted,create_time,update_time
@@ -48,8 +48,8 @@
             <if test="payStatus != null">
                 pay_status,
             </if>
-            <if test="payType != null">
-                pay_type,
+            <if test="payMethod != null">
+                pay_method,
             </if>
             <if test="payTime != null">
                 pay_time,
@@ -76,45 +76,45 @@
                 update_time,
             </if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <trim prefix="value (" suffix=")" suffixOverrides=",">
             <if test="orderNo != null">
-                order_no = #{orderNo},
+                #{orderNo},
             </if>
             <if test="userId != null">
-                user_id = #{userId},
+                #{userId},
             </if>
             <if test="totalPrice != null">
-                total_price = #{totalPrice},
+                #{totalPrice},
             </if>
             <if test="payStatus != null">
-                pay_status = #{payStatus},
+                #{payStatus},
             </if>
-            <if test="payType != null">
-                pay_type = #{payType},
+            <if test="payMethod != null">
+                #{payMethod},
             </if>
             <if test="payTime != null">
-                pay_time = #{payTime},
+                #{payTime},
             </if>
             <if test="orderStatus != null">
-                order_status = #{orderStatus},
+                #{orderStatus},
             </if>
             <if test="extraInfo != null">
-                extra_info = #{extraInfo},
+                #{extraInfo},
             </if>
             <if test="userName != null">
-                user_name = #{userName},
+                #{userName},
             </if>
             <if test="userPhone != null">
-                user_phone = #{userPhone},
+                #{userPhone},
             </if>
             <if test="userAddress != null">
-                user_address = #{userAddress},
+                #{userAddress},
             </if>
             <if test="isDeleted != null">
-                is_deleted = #{isDeleted},
+                #{isDeleted},
             </if>
             <if test="updateTime != null">
-                update_time = #{updateTime},
+                #{updateTime},
             </if>
         </trim>
     </insert>

@@ -2,7 +2,7 @@ package com.wukongnotnull.shop.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wukongnotnull.shop.common.ServiceResultEnum;
-import com.wukongnotnull.shop.vo.CartItemVO;
+import com.wukongnotnull.shop.controller.vo.CartItemVO;
 import com.wukongnotnull.shop.domain.CartItem;
 import com.wukongnotnull.shop.domain.GoodsDetail;
 import com.wukongnotnull.shop.mapper.GoodsDetailMapper;
