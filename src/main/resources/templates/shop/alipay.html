@@ -78,12 +78,12 @@
         var orderNo = $("#orderNoValue").val();
         $.ajax({
             type: 'GET',
-            url: '/paySuccess?payType=1&orderNo=' + orderNo,
-            success: function (result) {
-                if (result.resultCode == 200) {
+            url: '/paySuccess?payMethod=1&orderNo=' + orderNo,
+            success: function (response) {
+                if (response.code == 20000) {
                     window.location.href = '/orders/' + orderNo;
                 } else {
-                    alert(result.message);
+                    alert(response.msg);
                 }
             },
             error: function () {

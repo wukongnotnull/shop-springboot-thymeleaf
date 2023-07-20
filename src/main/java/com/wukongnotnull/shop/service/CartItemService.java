@@ -46,4 +46,11 @@ public interface CartItemService extends IService<CartItem> {
      * @return String
      */
     String updateCartItem(CartItem cartItem);
+
+    /**
+     * according to userId ,drop cart items
+     * @param userId userId
+     * @return String
+     */
+    String dropCartItems(Long userId);
 }

@@ -50,6 +50,13 @@ public interface CartItemMapper extends BaseMapper<CartItem> {
      * @return int
      */
     int updateCartItem(CartItem cartItem);
+
+    /**
+     * delete cart items ,in fact , change is_deleted value from 0 to 1
+     * @param userId
+     * @return
+     */
+    int deleteCartItems(@Param("userId") Long userId);
 }
 
 

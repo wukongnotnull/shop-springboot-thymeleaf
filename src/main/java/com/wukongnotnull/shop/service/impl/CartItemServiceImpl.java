@@ -69,6 +69,21 @@ public class CartItemServiceImpl extends ServiceImpl<CartItemMapper, CartItem>
 
     }
 
+    /**
+     * according to userId ,drop cart items
+     *
+     * @param userId userId
+     * @return String
+     */
+    @Override
+    public String dropCartItems(Long userId) {
+        int i =cartItemMapper.deleteCartItems(userId);
+        if (i <= 0) {
+            return  ServiceResultEnum.ERROR.getResult();
+        }
+       return ServiceResultEnum.SUCCESS.getResult();
+    }
+
 
     /**
      * 查询指定用户下的购物车明细记录列表

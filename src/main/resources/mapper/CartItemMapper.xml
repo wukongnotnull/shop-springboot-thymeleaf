@@ -80,6 +80,12 @@
         and is_deleted = 0
     </update>
 
+    <update id="deleteCartItems">
+        update shop_cart_item
+        set is_deleted = 1
+        where user_id = #{userId}
+    </update>
+
     <select id="selectCartItemCount" resultType="java.lang.Integer">
         select  count(1)
         from shop_cart_item

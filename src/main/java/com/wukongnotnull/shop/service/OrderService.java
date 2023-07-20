@@ -23,4 +23,11 @@ public interface OrderService extends IService<Order> {
      */
     OrderDetailBO findOrderDetail(String orderNo);
 
+    /**
+     * 当支付成功后，修改订单信息
+     * @param orderNo
+     * @param payMethod
+     * @return
+     */
+    String modifyOrderWhenPaySuccess(String orderNo, Integer payMethod);
 }

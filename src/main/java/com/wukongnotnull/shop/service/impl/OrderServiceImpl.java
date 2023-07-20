@@ -1,11 +1,9 @@
 package com.wukongnotnull.shop.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wukongnotnull.shop.common.*;
 import com.wukongnotnull.shop.service.bo.CartItemBO;
 import com.wukongnotnull.shop.service.bo.OrderDetailBO;
-import com.wukongnotnull.shop.common.OrderStatusEnum;
-import com.wukongnotnull.shop.common.PayStatusEnum;
-import com.wukongnotnull.shop.common.PayMethodEnum;
 import com.wukongnotnull.shop.domain.GoodsDetail;
 import com.wukongnotnull.shop.domain.OrderItem;
 import com.wukongnotnull.shop.exception.ShopException;
@@ -66,7 +64,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
         // 支付状态：未支付
         order.setPayStatus(PayStatusEnum.PAY_READY.getPayStatus());
 
-        // 支付方式
+        // 支付方法
         order.setPayMethod(PayMethodEnum.NO_TYPE_PAY.getPayMethod());
 
         // 支付时间
@@ -111,7 +109,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
         // 在 shop_order_item 表中批量插入订单信息
         //  int i = orderMapper.insertOrder(order); 使用 useGeneratedKeys = true  propertyKey =order_id
         int result = orderItemMapper.insertBatch(cartItemBOList);
-        if (result <1) {
+        if (result < 1) {
             System.out.println("在 shop_order_item 表中批量插入订单信息失败");
             ShopException.fail("在 shop_order_item 表中批量插入订单信息失败");
         }
@@ -131,12 +129,47 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
 
         OrderDetailBO orderDetailBO = new OrderDetailBO();
         Order order = orderMapper.selectOrder(orderNo);
-        BeanUtil.copyProperties(order,orderDetailBO);
+        BeanUtil.copyProperties(order, orderDetailBO);
         List<OrderItem> orderItemList = orderItemMapper.selectOrderItems(order.getOrderId());
         orderDetailBO.setOrderItemList(orderItemList);
         return orderDetailBO;
     }
+
+    /**
+     * 当支付成功后，修改订单信息
+     *
+     * @param orderNo   orderNo
+     * @param payMethod payMethod
+     * @return String
+     */
+    @Override
+    public String modifyOrderWhenPaySuccess(String orderNo, Integer payMethod) {
+        Order order = orderMapper.selectOrder(orderNo);
+        if (order == null) {
+            ShopException.fail("根据订单号，查询的订单不存在。。");
+        }
+        if (!order.getPayStatus().equals(PayStatusEnum.PAY_READY.getPayStatus())) {
+            ShopException.fail("该订单不是未支付状态下~~");
+        }
+        // modify pay_status , pay_method ,pay_time , order_status , update_time ,attribute etc.
+        Order orderWhenPaySuccess = new Order();
+        orderWhenPaySuccess.setOrderId(order.getOrderId());
+        orderWhenPaySuccess.setPayStatus(PayStatusEnum.PAY_SUCCESS.getPayStatus());
+        orderWhenPaySuccess.setPayMethod(payMethod);
+        orderWhenPaySuccess.setPayTime(new Date());
+        orderWhenPaySuccess.setOrderStatus(OrderStatusEnum.HAVE_PAID.getOrderStatus());
+        orderWhenPaySuccess.setUpdateTime(new Date());
+        // making a modification
+        int i = orderMapper.updateOrder(orderWhenPaySuccess);
+        if (i == 1) {
+            return ServiceResultEnum.SUCCESS.getResult();
+        }
+
+        return ServiceResultEnum.ERROR.getResult();
+    }
 }
+
+
 
 
 

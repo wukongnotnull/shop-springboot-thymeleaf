@@ -27,6 +27,13 @@ public interface OrderMapper extends BaseMapper<Order> {
      * @return
      */
     Order selectOrder(@Param("orderNo") String orderNo);
+
+    /**
+     * modify order table
+     * @param order
+     * @return
+     */
+    int updateOrder(Order order);
 }
 
 

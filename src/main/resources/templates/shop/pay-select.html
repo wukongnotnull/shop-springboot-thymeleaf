@@ -160,9 +160,9 @@
         alert('暂不支持，请耐心等候');
     })
 
-    function payOrder(payType) {
+    function payOrder(payMethod) {
         var orderNo = $("#orderNoValue").val();
-        window.location.href = '/payPage?orderNo=' + orderNo + "&payType=" + payType;
+        window.location.href = '/payPage?orderNo=' + orderNo + "&payMethod=" + payMethod;
     }
 </script>
 </body>

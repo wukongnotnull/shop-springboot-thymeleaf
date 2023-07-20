@@ -7,8 +7,8 @@ package com.wukongnotnull.shop.common;
  */
 public enum PayStatusEnum {
     PAY_ERROR(-1, "支付失败"),
-    PAY_READY(1, "未支付,准备支付"),
-    PAY_SUCCESS(2, "支付成功");
+    PAY_READY(0, "未支付,准备支付"),
+    PAY_SUCCESS(1, "支付成功");
     private Integer payStatus;
     private String name;
 

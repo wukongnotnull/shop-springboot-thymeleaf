@@ -7,6 +7,7 @@ import com.wukongnotnull.shop.controller.vo.CodeMessageEnum;
 import com.wukongnotnull.shop.controller.vo.HttpResponseResult;
 import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
 import com.wukongnotnull.shop.domain.CartItem;
+import com.wukongnotnull.shop.exception.ShopException;
 import com.wukongnotnull.shop.service.CartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,21 +34,26 @@ public class CartItemController {
         // 获得购物车明细vo列表
         // 查询指定用户下的购物车明细记录
         OrdinaryUserVO ordinaryUserVO = (OrdinaryUserVO) httpSession.getAttribute(Constants.LOGIN_SUCCESS_SESSION_KEY);
+        if (ordinaryUserVO == null) {
+            ShopException.fail("ordinaryUserVO 不能为空");
+        }
         List<CartItemVO> cartItemVOList = null;
         int goodsTotalPrice = 0;
         int goodsTotalCount = 0;
-        if(ordinaryUserVO != null) {
-            // 分页查询
-            cartItemVOList = cartItemService.findCartItemList(ordinaryUserVO.getUserId());
-            // 统计指定用户下购物车中商品总数
-            // 统计指定用户下购物车中总价
 
-            for(CartItemVO cartItemVO: cartItemVOList){
-                goodsTotalPrice += cartItemVO.getSellingPrice() * cartItemVO.getGoodsCount();
-                goodsTotalCount += cartItemVO.getGoodsCount();
-            }
+        // query cart item list
+        cartItemVOList = cartItemService.findCartItemList(ordinaryUserVO.getUserId());
+        // 统计指定用户下购物车中商品总数
+        // 统计指定用户下购物车中总价
+
+        for(CartItemVO cartItemVO: cartItemVOList){
+            goodsTotalPrice += cartItemVO.getSellingPrice() * cartItemVO.getGoodsCount();
+            goodsTotalCount += cartItemVO.getGoodsCount();
         }
 
+
+        // 将  goodsTotalPrice 存入 session 中
+        ordinaryUserVO.setTotalPrice(goodsTotalPrice);
 
         // model 返回数据给页面
         model.addAttribute("cartItemVOListPage",cartItemVOList);
@@ -127,19 +133,29 @@ public class CartItemController {
                                      ){
         // 查询指定用户下的购物车明细记录
         OrdinaryUserVO ordinaryUserVO = (OrdinaryUserVO) httpSession.getAttribute(Constants.LOGIN_SUCCESS_SESSION_KEY);
-        List<CartItemVO> cartItemVOList = null;
-        int goodsTotalPrice = 0;
-        int goodsTotalCount = 0;
-        if(ordinaryUserVO != null) {
-            cartItemVOList = cartItemService.findCartItemList(ordinaryUserVO.getUserId());
-            // 统计指定用户下购物车中商品总数
-            // 统计指定用户下购物车中总价
-            for(CartItemVO cartItemVO: cartItemVOList){
-                goodsTotalPrice += cartItemVO.getSellingPrice() * cartItemVO.getGoodsCount();
-                goodsTotalCount += cartItemVO.getGoodsCount();
-            }
+
+
+        if (ordinaryUserVO == null) {
+            return "redirect:/login";
         }
 
+        List<CartItemVO> cartItemVOList = cartItemService.findCartItemList(ordinaryUserVO.getUserId());
+
+        if (cartItemVOList == null) {
+            // model 返回数据给页面
+            model.addAttribute("cartItemVOListPage",null);
+            model.addAttribute("goodsTotalCount",0);
+            model.addAttribute("goodsTotalPrice",0);
+            return "shop/cart";
+        }
+        // 统计指定用户下购物车中商品总数
+        // 统计指定用户下购物车中总价
+        int goodsTotalPrice = 0;
+        int goodsTotalCount = 0;
+        for(CartItemVO cartItemVO: cartItemVOList){
+            goodsTotalPrice += cartItemVO.getSellingPrice() * cartItemVO.getGoodsCount();
+            goodsTotalCount += cartItemVO.getGoodsCount();
+        }
 
         // model 返回数据给页面
         model.addAttribute("cartItemVOListPage",cartItemVOList);

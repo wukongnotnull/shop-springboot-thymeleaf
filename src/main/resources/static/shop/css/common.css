@@ -34,7 +34,8 @@ a {
   float: left;
 }
 .fr {
-  float: right;
+ /*float: left;*/
+  margin: 0 auto;
 }
 .clear {
   clear: both;

@@ -34,5 +34,10 @@ class OrderServiceTest {
         System.out.println("orderDetailBO = " + orderDetailBO);
     }
 
+    @Test
+    void modifyOrderWhenPaySuccess(){
+        String s = orderService.modifyOrderWhenPaySuccess("16898452054657592", 1);
+        System.out.println("modify result is s = " + s);
+    }
 
 }
