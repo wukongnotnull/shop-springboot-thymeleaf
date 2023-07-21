@@ -1,5 +1,6 @@
 package com.wukongnotnull.shop.service;
 
+import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
 import com.wukongnotnull.shop.domain.OrdinaryUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -38,4 +39,12 @@ public interface OrdinaryUserService extends IService<OrdinaryUser> {
      */
     String updateAddress(OrdinaryUser ordinaryUser,HttpSession httpSession);
 
+    /**
+     * by userId, address,introduceSign,nickName in ordinaryUserVO ,
+     * update record data in shop_ordinary_user table
+     * @param ordinaryUserVO ordinaryUserVO
+     * @param  httpSession httpSession
+     * @return String
+     */
+    String modifyOrdinaryUserInfo(OrdinaryUserVO ordinaryUserVO,HttpSession httpSession);
 }

@@ -5,10 +5,12 @@ import com.wukongnotnull.shop.common.Constants;
 import com.wukongnotnull.shop.common.ServiceResultEnum;
 import com.wukongnotnull.shop.controller.vo.CodeMessageEnum;
 import com.wukongnotnull.shop.controller.vo.HttpResponseResult;
+import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
 import com.wukongnotnull.shop.domain.OrdinaryUser;
 import com.wukongnotnull.shop.service.OrdinaryUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +27,29 @@ import java.io.IOException;
 public class OrdinaryUserController {
     @Autowired
     private OrdinaryUserService ordinaryUserService;
+
+    @PostMapping("/personal/updateInfo")
+    @ResponseBody
+    public HttpResponseResult<Object> modifyOrdinaryUserInfo(@RequestBody OrdinaryUserVO ordinaryUserVO,
+                                                             HttpSession httpSession){
+       // data validation
+
+        // call function of service layer
+       String result =  ordinaryUserService.modifyOrdinaryUserInfo(ordinaryUserVO,httpSession);
+        if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
+           return HttpResponseResult.success();
+        }
+        return HttpResponseResult.fail(CodeMessageEnum.UPDATE_FAIL);
+    }
+
+    /**
+     *  show  personal center page
+     * @return
+     */
+    @GetMapping("/personal")
+    public String showPersonCenter(){
+        return "shop/user/personal";
+    }
 
     /**
      * 修改用户的地址
@@ -108,7 +133,7 @@ public class OrdinaryUserController {
      */
     @GetMapping(value = "/register")
     public String register(){
-        return "shop/register";
+        return "shop/user/register";
     }
 
     /**

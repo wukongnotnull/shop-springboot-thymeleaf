@@ -53,7 +53,7 @@ public class GoodsDetailController {
 
         model.addAttribute("goodsDetail",goodsDetailVO);
         // todo 商品详情页的轮播图，需要完善一下
-        return "shop/detail";
+        return "shop/goods-detail";
     }
 
 

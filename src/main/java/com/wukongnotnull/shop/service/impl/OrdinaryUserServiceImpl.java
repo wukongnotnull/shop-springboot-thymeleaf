@@ -126,6 +126,33 @@ public class OrdinaryUserServiceImpl extends ServiceImpl<OrdinaryUserMapper, Ord
        }
     }
 
+    /**
+     * by userId, address,introduceSign,nickName in ordinaryUserVO ,
+     * update record data in shop_ordinary_user table
+     * @param httpSession httpSession
+     * @param ordinaryUserVO ordinaryUserVO
+     * @return String
+     */
+    @Override
+    public String modifyOrdinaryUserInfo(OrdinaryUserVO ordinaryUserVO,
+                                         HttpSession httpSession) {
+
+        OrdinaryUser ordinaryUser = new OrdinaryUser();
+        BeanUtil.copyProperties(ordinaryUserVO,ordinaryUser);
+        Integer i = ordinaryUserMapper.updateOrdinaryUser(ordinaryUser);
+        if (i == 1) {
+            // modify personal data in session
+            OrdinaryUserVO ordinaryUserVOSession = (OrdinaryUserVO) httpSession.getAttribute(Constants.LOGIN_SUCCESS_SESSION_KEY);
+            ordinaryUserVOSession.setAddress(ordinaryUserVO.getAddress());
+            ordinaryUserVOSession.setIntroduceSign(ordinaryUserVO.getIntroduceSign());
+            ordinaryUserVOSession.setNickName(ordinaryUserVO.getNickName());
+            return ServiceResultEnum.SUCCESS.getResult();
+
+        }
+
+        return ServiceResultEnum.ERROR.getResult();
+    }
+
 }
 
 

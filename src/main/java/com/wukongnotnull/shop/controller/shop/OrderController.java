@@ -78,9 +78,9 @@ public class OrderController {
         model.addAttribute("totalPrice", orderDetailBO.getTotalPrice());
         model.addAttribute("orderNo", orderNo);
         if (payMethod == 1) {
-            return "shop/alipay";
+            return "shop/pay/alipay";
         } else {
-            return "shop/wxpay";
+            return "shop/pay/wxpay";
         }
 
     }
@@ -95,7 +95,7 @@ public class OrderController {
         model.addAttribute("orderNo", orderNo);
 
 
-        return "shop/pay-select";
+        return "shop/pay/pay-select";
     }
 
     @GetMapping("/saveOrder")
@@ -134,7 +134,7 @@ public class OrderController {
 
 
         model.addAttribute("orderDetailVO", orderDetailVO);
-        return "shop/order-detail";
+        return "shop/order/order-detail";
 
 
     }

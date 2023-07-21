@@ -2,7 +2,7 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: jdbc:mysql://localhost:3306/db_wukong_shop?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&autoReconnect=true
+    url: jdbc:mysql://localhost:3306/db_wukong_shop?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: rootroot

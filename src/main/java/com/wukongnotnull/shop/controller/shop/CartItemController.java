@@ -60,7 +60,7 @@ public class CartItemController {
         model.addAttribute("goodsTotalCount",goodsTotalCount);
         model.addAttribute("goodsTotalPrice",goodsTotalPrice);
 
-        return "shop/order-settle";
+        return "shop/order/order-settle";
     }
 
 
