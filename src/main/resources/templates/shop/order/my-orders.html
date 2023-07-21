@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="shop/header::head-fragment('NewBee商城-订单列表','my-orders')">
+<head th:replace="shop/common/header::head-fragment('悟空商城-订单列表','my-orders')">
 </head>
 <body>
-<header th:replace="shop/header::header-fragment"></header>
+<header th:replace="shop/common/header::header-fragment"></header>
 <!-- nav -->
-<nav th:replace="shop/header::nav-fragment"></nav>
+<nav th:replace="shop/common/header::nav-fragment"></nav>
 
 <!-- personal -->
 <div id="personal">
     <div class="self-info center">
 
         <!-- sidebar -->
-        <div th:replace="shop/user/personal-sidebar::sidebar-fragment"></div>
+        <!--        <div th:replace="shop/user/personal-sidebar::sidebar-fragment"></div>-->
 
         <div class="intro fr">
             <div class="uc-box uc-main-box">
                 <div class="uc-content-box order-list-box">
                     <div class="box-hd">
                         <h1 class="title">我的订单
-                            <sshop>请谨防钓鱼链接或诈骗电话，<a href="##">了解更多&gt;</a>
-                            </sshop>
+                            <br>请谨防钓鱼链接或诈骗电话，<a href="##">了解更多&gt;</a>
                         </h1>
                     </div>
                     <div class="box-bd">
@@ -29,12 +28,11 @@
                                 <th:block th:if="${#lists.isEmpty(orderPageResult.list)}">
                                     <img style="margin-top: 16px;"
                                          th:src="@{/shop/image/null-content.png}">
-                                    <sshop><a th:href="@{/index}">&nbsp;&nbsp;&nbsp;&nbsp;去购物&gt;</a>
-                                    </sshop>
+                                    <a th:href="@{/index}">&nbsp;&nbsp;&nbsp;&nbsp;去购物&gt;</a>
+
                                 </th:block>
                                 <th:block th:unless="${#lists.isEmpty(orderPageResult.list)}">
                                     <th:block th:each="order : ${orderPageResult.list}">
-
                                         <li class="uc-order-item uc-order-item-list">
                                             <div class="order-detail">
                                                 <div class="order-summary">
@@ -71,7 +69,7 @@
                                                     <td class="order-items">
                                                         <ul class="goods-list">
                                                             <th:block
-                                                                    th:each="item : ${order.newBeeshopOrderItemVOS}">
+                                                                    th:each="item : ${order.orderItemList}">
                                                                 <li>
                                                                     <div class="figure figure-thumb">
                                                                         <a target="_blank"
@@ -102,28 +100,31 @@
                         </th:block>
                         </ul>
                     </div>
+                    <!--                    分页导航设计-->
                     <th:block th:unless="${#lists.isEmpty(orderPageResult.list)}">
                         <div id="J_orderListPages">
                             <div class="newbee-pagenavi">
-                                <th:block th:if="${orderPageResult.currPage-2 >=1}"><a
-                                        class="numbers"
-                                        th:href="@{'/orders?page=' + ${orderPageResult.currPage-2}}"
-                                        th:text="${orderPageResult.currPage -2}">1</a>
+                                <th:block th:if="${orderPageResult.pageNo-2 >=1}">
+                                    <a
+                                            class="numbers"
+                                            th:href="@{'/myOrders?pageNo=' + ${orderPageResult.pageNo-2}}"
+                                            th:text="${orderPageResult.pageNo -2}">1</a>
                                 </th:block>
-                                <th:block th:if="${orderPageResult.currPage-1 >=1}"><a
+                                <th:block th:if="${orderPageResult.pageNo-1 >=1}"><a
                                         class="numbers"
-                                        th:href="@{'/orders?page=' + ${orderPageResult.currPage-1}}"
-                                        th:text="${orderPageResult.currPage -1}">1</a>
+                                        th:href="@{'/myOrders?pageNo=' + ${orderPageResult.pageNo-1}}"
+                                        th:text="${orderPageResult.pageNo -1}">1</a>
                                 </th:block>
-                                <a href="##" class="numbers current" th:text="${orderPageResult.currPage}">1</a>
-                                <th:block th:if="${orderPageResult.currPage+1<=orderPageResult.totalPage}"><a
+                                <a href="##" class="numbers current" th:text="${orderPageResult.pageNo}">1</a>
+                                <th:block th:if="${orderPageResult.pageNo+1<=orderPageResult.totalPages}">
+                                    <a
+                                            class="numbers"
+                                            th:href="@{'/myOrders?pageNo=' + ${orderPageResult.pageNo+1}}"
+                                            th:text="${orderPageResult.pageNo +1}">1</a></th:block>
+                                <th:block th:if="${orderPageResult.pageNo+2<=orderPageResult.totalPages}"><a
                                         class="numbers"
-                                        th:href="@{'/orders?page=' + ${orderPageResult.currPage+1}}"
-                                        th:text="${orderPageResult.currPage +1}">1</a></th:block>
-                                <th:block th:if="${orderPageResult.currPage+2<=orderPageResult.totalPage}"><a
-                                        class="numbers"
-                                        th:href="@{'/orders?page=' + ${orderPageResult.currPage+2}}"
-                                        th:text="${orderPageResult.currPage +2}">1</a></th:block>
+                                        th:href="@{'/myOrders?pageNo=' + ${orderPageResult.pageNo+2}}"
+                                        th:text="${orderPageResult.pageNo +2}">1</a></th:block>
                             </div>
                         </div>
                     </th:block>
@@ -135,7 +136,7 @@
 </div>
 </div>
 
-<div th:replace="shop/footer::footer-fragment"></div>
+<div th:replace="shop/common/footer::footer-fragment"></div>
 
 <!-- jQuery -->
 <script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>

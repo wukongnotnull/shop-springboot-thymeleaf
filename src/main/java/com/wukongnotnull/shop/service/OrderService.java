@@ -4,6 +4,7 @@ import com.wukongnotnull.shop.service.bo.OrderDetailBO;
 import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
 import com.wukongnotnull.shop.domain.Order;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wukongnotnull.shop.service.bo.OrderDetailPageBO;
 
 /**
 * @author 悟空非空也
@@ -30,4 +31,14 @@ public interface OrderService extends IService<Order> {
      * @return
      */
     String modifyOrderWhenPaySuccess(String orderNo, Integer payMethod);
+
+    /**
+     * query orders of login user by page
+     *
+     * @param pageNo  current page no
+     * @param pageSize record count per page
+     * @param userId  id of login user
+     * @return  OrderDetailBO
+     */
+    OrderDetailPageBO getOrdersPage(Integer pageNo, Integer pageSize, Long userId);
 }

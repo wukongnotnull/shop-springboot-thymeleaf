@@ -14,7 +14,7 @@
 - 支付方式选择页面
 - 支付操作页面
 
-# sql 语句
+## sql 语句
 ```sql
 create table shop_admin_user
 (

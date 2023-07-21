@@ -54,6 +54,11 @@ public class OrderDetailBO {
     private Integer orderStatus;
 
     /**
+     * 订单状态:0.待支付 1.已支付 2.配货完成 3:出库成功 4.交易成功 -1.手动关闭 -2.超时关闭 -3.商家关闭
+     */
+    private String orderStatusString;
+
+    /**
      * 订单body
      */
     private String extraInfo;
@@ -83,5 +88,16 @@ public class OrderDetailBO {
 
 
     private  Date createTime;
+
+    /**
+     * total page number
+     */
+    private  Integer totalPages;
+
+    /**
+     * total record number
+     */
+    private  Integer totalCounts;
+
 
 }

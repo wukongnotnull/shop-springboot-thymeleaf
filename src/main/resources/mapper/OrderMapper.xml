@@ -176,4 +176,20 @@
         from shop_order
         where order_no = #{orderNo}
     </select>
+
+
+    <select id="selectOrdersPage" resultType="com.wukongnotnull.shop.domain.Order">
+        select
+        <include refid="Base_Column_List"/>
+        from shop_order
+        where user_id = #{userId}
+        order by create_time desc
+        limit #{pageIndex},#{pageSize}
+    </select>
+
+    <select id="selectTotalCounts" resultType="java.lang.Integer">
+        select count(1)
+        from shop_order
+        where  user_id = #{userId}
+    </select>
 </mapper>

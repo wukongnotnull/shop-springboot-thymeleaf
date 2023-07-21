@@ -8,6 +8,7 @@ import com.wukongnotnull.shop.domain.GoodsDetail;
 import com.wukongnotnull.shop.domain.OrderItem;
 import com.wukongnotnull.shop.exception.ShopException;
 import com.wukongnotnull.shop.mapper.GoodsDetailMapper;
+import com.wukongnotnull.shop.service.bo.OrderDetailPageBO;
 import com.wukongnotnull.shop.util.BeanUtil;
 import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
 import com.wukongnotnull.shop.domain.CartItem;
@@ -166,6 +167,69 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
         }
 
         return ServiceResultEnum.ERROR.getResult();
+    }
+
+    /**
+     * query orders of login user by page
+     *
+     * @param pageNo   current page no
+     * @param pageSize record count per page
+     * @param userId   id of login user
+     * @return OrderDetailBO
+     * <p>
+     * {
+     * OrderDetailBOList:[
+     * { // OrderDetailBO
+     * key: value,
+     * key2:value,
+     * orderItemList：[
+     * {},{},{}
+     * ]
+     * }
+     * ],
+     * totalPages: 10,
+     * totalCounts: 100
+     * }
+     */
+    @Override
+    public OrderDetailPageBO getOrdersPage(Integer pageNo, Integer pageSize, Long userId) {
+        int pageIndex = (pageNo - 1) * pageSize;
+        List<Order> orderList = orderMapper.selectOrdersPage(pageIndex, pageSize, userId);
+        // by orderId in orderList, query order_item table
+        if (orderList == null) {
+            ShopException.fail("orderList is  null .....");
+        }
+
+        List<OrderDetailBO> orderDetailBOList = new ArrayList<>();
+        for (Order order : orderList) {
+            OrderDetailBO orderDetailBO = new OrderDetailBO();
+            BeanUtil.copyProperties(order, orderDetailBO);
+
+            List<OrderItem> orderItems = orderItemMapper.selectOrderItems(order.getOrderId());
+            orderDetailBO.setOrderItemList(orderItems);
+            // OrderStatus to OrderStatusString
+            orderDetailBO.setOrderStatusString(OrderStatusEnum.getOrderStatusName(order.getOrderStatus()));
+            orderDetailBOList.add(orderDetailBO);
+        }
+
+        //   totalCounts
+        int totalCounts = orderMapper.selectTotalCounts(userId);
+
+        // totalPages
+        int totalPages = 0;
+        if (totalCounts % pageSize == 0) {
+            totalPages = totalCounts / pageSize;
+        } else {
+            totalPages = totalCounts / pageSize + 1;
+        }
+
+        OrderDetailPageBO orderDetailPageBO = new OrderDetailPageBO();
+        orderDetailPageBO.setTotalPages(totalPages);
+        orderDetailPageBO.setTotalCounts(totalCounts);
+        orderDetailPageBO.setPageNo(pageNo);
+        orderDetailPageBO.setList(orderDetailBOList);
+
+        return orderDetailPageBO;
     }
 }
 

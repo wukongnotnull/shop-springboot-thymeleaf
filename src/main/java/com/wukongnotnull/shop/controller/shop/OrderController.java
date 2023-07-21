@@ -9,6 +9,7 @@ import com.wukongnotnull.shop.service.bo.OrderDetailBO;
 import com.wukongnotnull.shop.exception.ShopException;
 import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
 import com.wukongnotnull.shop.service.OrderService;
+import com.wukongnotnull.shop.service.bo.OrderDetailPageBO;
 import com.wukongnotnull.shop.util.BeanUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,20 @@ public class OrderController {
     private OrderService orderService;
     @Resource
     private CartItemService cartItemService;
+
+    @GetMapping("/myOrders")
+    public String findMyOrdersPage(@RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo,
+                                   @RequestParam(value = "pageSize",defaultValue = "4") Integer pageSize,
+                                   HttpSession httpSession,
+                                   Model model){
+        // query all orders of login user in pages
+        // return an object which includes order list and total pages and total number of order records
+        OrdinaryUserVO ordinaryUserVO = (OrdinaryUserVO) httpSession.getAttribute(Constants.LOGIN_SUCCESS_SESSION_KEY);
+        Long userId = ordinaryUserVO.getUserId();
+        OrderDetailPageBO orderDetailPageBO =orderService.getOrdersPage(pageNo,pageSize,userId);
+        model.addAttribute("orderPageResult",orderDetailPageBO);
+        return "shop/order/my-orders";
+    }
 
     @GetMapping("/paySuccess")
     @ResponseBody
