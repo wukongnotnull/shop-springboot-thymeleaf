@@ -29,6 +29,7 @@ public interface GoodsCategoryMapper extends BaseMapper<GoodsCategory> {
             @Param("categoryMaxNum") int indexCategoryMaxNum);
 
 
+    GoodsCategory selectCategoryBy(@Param("categoryId") Long categoryId);
 
 }
 

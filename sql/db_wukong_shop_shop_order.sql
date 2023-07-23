@@ -6,6 +6,7 @@ create table shop_order
     user_id      bigint       default 0                 not null comment '用户主键id',
     total_price  int          default 1                 not null comment '订单总价',
     pay_status   tinyint      default 0                 not null comment '支付状态:0.未支付,1.支付成功,-1:支付失败',
+    pay_method   tinyint      default 0                 not null comment '支付方式：0.无 1.支付宝支付 2.微信支付',
     pay_time     datetime                               null comment '支付时间',
     order_status tinyint      default 0                 not null comment '订单状态:0.待支付 1.已支付 2.配货完成 3:出库成功 4.交易成功 -1.手动关闭 -2.超时关闭 -3.商家关闭',
     extra_info   varchar(100) default ''                not null comment '订单body',
@@ -14,8 +15,7 @@ create table shop_order
     user_address varchar(100) default ''                not null comment '收货人收货地址',
     is_deleted   tinyint      default 0                 not null comment '删除标识字段(0-未删除 1-已删除)',
     create_time  datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
-    update_time  datetime     default CURRENT_TIMESTAMP not null comment '最新修改时间',
-    pay_method   tinyint      default 0                 not null comment '支付方式：0.无 1.支付宝支付 2.微信支付'
+    update_time  datetime     default CURRENT_TIMESTAMP not null comment '最新修改时间'
 )
     charset = utf8;
 
@@ -47,3 +47,10 @@ INSERT INTO db_wukong_shop.shop_order (order_id, order_no, user_id, total_price,
 INSERT INTO db_wukong_shop.shop_order (order_id, order_no, user_id, total_price, pay_status, pay_method, pay_time, order_status, extra_info, user_name, user_phone, user_address, is_deleted, create_time, update_time) VALUES (49, '16898589484585444', 11, 12287, 1, 1, '2023-07-20 13:15:53', 1, '', '15312345676', '', 'seeddd22sss', 0, '2023-07-20 21:15:48', '2023-07-20 13:15:53');
 INSERT INTO db_wukong_shop.shop_order (order_id, order_no, user_id, total_price, pay_status, pay_method, pay_time, order_status, extra_info, user_name, user_phone, user_address, is_deleted, create_time, update_time) VALUES (50, '16898602620491699', 11, 4198, 1, 1, '2023-07-20 13:37:51', 1, '', '15312345676', '', 'seeddd22sss', 0, '2023-07-20 21:37:42', '2023-07-20 13:37:51');
 INSERT INTO db_wukong_shop.shop_order (order_id, order_no, user_id, total_price, pay_status, pay_method, pay_time, order_status, extra_info, user_name, user_phone, user_address, is_deleted, create_time, update_time) VALUES (51, '16898605181496771', 11, 1246, 0, 0, '2023-07-20 13:41:58', 0, '', '15312345676', '', 'seeddd22sss', 0, '2023-07-20 21:41:58', '2023-07-20 21:41:58');
+INSERT INTO db_wukong_shop.shop_order (order_id, order_no, user_id, total_price, pay_status, pay_method, pay_time, order_status, extra_info, user_name, user_phone, user_address, is_deleted, create_time, update_time) VALUES (52, '16899046696264738', 11, 1246, 1, 1, '2023-07-21 01:58:12', 1, '', '15312345676', '', 'seeddd22sss', 0, '2023-07-21 09:57:49', '2023-07-21 01:58:12');
+INSERT INTO db_wukong_shop.shop_order (order_id, order_no, user_id, total_price, pay_status, pay_method, pay_time, order_status, extra_info, user_name, user_phone, user_address, is_deleted, create_time, update_time) VALUES (53, '16899049678896103', 11, 6799, 0, 0, '2023-07-21 02:02:48', 0, '', '15312345676', '', 'seeddd22sss', 0, '2023-07-21 10:02:47', '2023-07-21 10:02:47');
+INSERT INTO db_wukong_shop.shop_order (order_id, order_no, user_id, total_price, pay_status, pay_method, pay_time, order_status, extra_info, user_name, user_phone, user_address, is_deleted, create_time, update_time) VALUES (54, '16899050501024167', 11, 6799, 1, 1, '2023-07-21 02:05:59', 1, '', '15312345676', '', 'seeddd22sss', 0, '2023-07-21 10:04:10', '2023-07-21 02:05:59');
+INSERT INTO db_wukong_shop.shop_order (order_id, order_no, user_id, total_price, pay_status, pay_method, pay_time, order_status, extra_info, user_name, user_phone, user_address, is_deleted, create_time, update_time) VALUES (55, '16899196756701581', 11, 3199, 0, 0, '2023-07-21 06:07:56', 0, '', '悟空非空也', '', '南京市南京市南京市玄武区', 0, '2023-07-21 14:07:55', '2023-07-21 14:07:55');
+INSERT INTO db_wukong_shop.shop_order (order_id, order_no, user_id, total_price, pay_status, pay_method, pay_time, order_status, extra_info, user_name, user_phone, user_address, is_deleted, create_time, update_time) VALUES (56, '16899204543414851', 11, 13194, 1, 1, '2023-07-21 06:21:00', 1, '', '悟空非空也', '', '南京市南京市南京市玄武区', 0, '2023-07-21 14:20:54', '2023-07-21 06:21:00');
+INSERT INTO db_wukong_shop.shop_order (order_id, order_no, user_id, total_price, pay_status, pay_method, pay_time, order_status, extra_info, user_name, user_phone, user_address, is_deleted, create_time, update_time) VALUES (57, '16899206549237193', 11, 1246, 0, 0, '2023-07-21 06:24:15', 0, '', '悟空非空也', '', '南京市南京市南京市玄武区', 0, '2023-07-21 14:24:14', '2023-07-21 14:24:14');
+INSERT INTO db_wukong_shop.shop_order (order_id, order_no, user_id, total_price, pay_status, pay_method, pay_time, order_status, extra_info, user_name, user_phone, user_address, is_deleted, create_time, update_time) VALUES (58, '16899433123008878', 11, 1246, 1, 1, '2023-07-21 12:41:57', 1, '', '悟空非空也', '', '南京市南京市南京市玄武区', 0, '2023-07-21 20:41:52', '2023-07-21 12:41:57');

@@ -19,4 +19,21 @@ public interface GoodsCategoryService extends IService<GoodsCategory> {
      * @return List<IndexCategoryVO>
      */
     List<IndexCategoryVO> getIndexCategoryNav();
+
+    /**
+     *  根据分类级别 和 父分类id列表 查询商品分栏列表
+     * @param level  分类级别
+     * @param parentIds  ParentIds
+     * @return  List<GoodsCategory>
+     */
+    List<GoodsCategory> selectByLevelAndParentIdsAndNumber(Integer level, List<Long> parentIds);
+
+    /**
+     *  queryCategoryBy
+     * @param categoryId categoryId
+     * @return GoodsCategory
+     */
+    GoodsCategory queryCategoryBy(Long categoryId);
+
+    Long findFatherCategoryId(Long thirdLevelCategoryId);
 }

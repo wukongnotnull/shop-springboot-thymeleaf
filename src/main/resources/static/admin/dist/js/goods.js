@@ -6,7 +6,7 @@ $(function () {
             {label: '商品编号', name: 'goodsId', index: 'goodsId', width: 60, key: true},
             {label: '商品名', name: 'goodsName', index: 'goodsName', width: 120},
             {label: '商品简介', name: 'goodsIntro', index: 'goodsIntro', width: 120},
-            {label: '商品图片', name: 'goodsCoverImg', index: 'goodsCoverImg', width: 120, formatter: coverImageFormatter},
+            {label: '商品图片', name: 'goodsCoverImg', index: 'goodsCoverImg', width: 100, formatter: coverImageFormatter},
             {label: '商品库存', name: 'stockNum', index: 'stockNum', width: 60},
             {label: '商品售价', name: 'sellingPrice', index: 'sellingPrice', width: 60},
             {
@@ -28,15 +28,16 @@ $(function () {
         autowidth: true,
         multiselect: true,
         pager: "#jqGridPager",
+        // 返回的响应数据
         jsonReader: {
             root: "data.list",
-            page: "data.currPage",
-            total: "data.totalPage",
+            page: "data.pageNo",
+            total: "data.totalPages",
             records: "data.totalCount"
         },
         prmNames: {
-            page: "page",
-            rows: "limit",
+            page: "page",  // 页码
+            rows: "limit", // 页容量
             order: "order",
         },
         gridComplete: function () {
@@ -64,6 +65,10 @@ $(function () {
     }
 
 });
+
+
+
+
 
 /**
  * jqGrid重新加载

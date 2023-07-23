@@ -7,10 +7,13 @@ import com.wukongnotnull.shop.domain.Carousel;
 import com.wukongnotnull.shop.service.CarouselService;
 import com.wukongnotnull.shop.mapper.CarouselMapper;
 import com.wukongnotnull.shop.util.BeanUtil;
+import com.wukongnotnull.shop.util.PageQueryMapUtil;
+import com.wukongnotnull.shop.util.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +25,7 @@ import java.util.List;
 public class CarouselServiceImpl extends ServiceImpl<CarouselMapper, Carousel>
     implements CarouselService{
 
-    @Autowired
+    @Resource
     private CarouselMapper carouselMapper;
 
     /**
@@ -41,6 +44,13 @@ public class CarouselServiceImpl extends ServiceImpl<CarouselMapper, Carousel>
             indexCarouselVOList = BeanUtil.copyList(carouselList, IndexCarouselVO.class);
         }
         return indexCarouselVOList;
+    }
+
+    @Override
+    public PageResult getCarouselPage(PageQueryMapUtil pageUtil) {
+        List<Carousel> carousels = carouselMapper.findCarouselListPage(pageUtil);
+        int total = carouselMapper.getCarouselsTotalCount();
+        return new PageResult(carousels, total, pageUtil.getLimit(), pageUtil.getPage());
     }
 }
 

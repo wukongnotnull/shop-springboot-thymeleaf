@@ -2,6 +2,7 @@ package com.wukongnotnull.shop.mapper;
 
 import com.wukongnotnull.shop.domain.Carousel;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.wukongnotnull.shop.util.PageQueryMapUtil;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -19,6 +20,10 @@ public interface CarouselMapper extends BaseMapper<Carousel> {
      * @return List<Carousel>
      */
     List<Carousel> getIndexCarousel(@Param("num") int indexCarouselNum);
+
+    List<Carousel> findCarouselListPage(PageQueryMapUtil pageUtil);
+
+    int getCarouselsTotalCount();
 }
 
 

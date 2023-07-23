@@ -17,7 +17,7 @@ import java.io.IOException;
 @Controller
 public class CommonController {
 
-    @GetMapping(value = "/common/shop/captcha")
+    @GetMapping(value = "/common/captcha")
     public void getCaptcha(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
         // 接口
         httpServletResponse.setHeader("Cache-Control", "no-store");

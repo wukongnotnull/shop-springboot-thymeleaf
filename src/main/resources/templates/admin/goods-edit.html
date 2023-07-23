@@ -25,17 +25,20 @@
                         <form id="goodsForm" onsubmit="return false;">
                             <div class="form-group" style="display:flex;">
                                 <label class="control-label">请选择分类:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+
+                                <!-- 一级分类 -->
                                 <select class="form-control col-sm-3" id="levelOne"
                                         data-placeholder="请选择分类...">
                                     <th:block th:unless="${null == firstLevelCategories}">
                                         <th:block th:each="c : ${firstLevelCategories}">
                                             <option th:value="${c.categoryId}" th:text="${c.categoryName}"
-                                                    th:selected="${null !=firstLevelCategoryId and firstLevelCategoryId==c.categoryId} ?true:false">
+                                                    th:selected="${null !=firstLevelCategoryId and firstLevelCategoryId == c.categoryId} ? true:false">
                                                 >
                                             </option>
                                         </th:block>
                                     </th:block>
                                 </select>&nbsp;
+
                                 <select class="form-control col-sm-3"
                                         id="levelTwo"
                                         data-placeholder="请选择分类...">
@@ -48,6 +51,7 @@
                                         </th:block>
                                     </th:block>
                                 </select>&nbsp;
+
                                 <select class="form-control col-sm-3"
                                         id="levelThree"
                                         data-placeholder="请选择分类...">
@@ -60,7 +64,9 @@
                                         </th:block>
                                     </th:block>
                                 </select>
+
                             </div>
+                            <!--                            表单 -->
                             <div class="form-group" style="display:flex;">
                                 <input type="hidden" id="goodsId" name="goodsId"
                                        th:value="${goods!=null and goods.goodsId!=null }?${goods.goodsId}: 0">
@@ -75,22 +81,22 @@
                                        required="true">
                             </div>
                             <div class="form-group" style="display:flex;">
-                                <input type="number" class="form-control col-sm-6" id="originalPrice"
+                                <input type="text" class="form-control col-sm-6" id="originalPrice"
                                        name="originalPrice"
                                        placeholder="*请输入商品价格"
-                                       th:value="${goods!=null and goods.originalPrice!=null }?${goods.originalPrice}: 1"
+                                       th:value="${goods!=null and goods.originalPrice!=null }?${goods.originalPrice}: ''"
                                        required="true">
                                 &nbsp;&nbsp;
-                                <input type="number" class="form-control col-sm-6" id="sellingPrice"
+                                <input type="text" class="form-control col-sm-6" id="sellingPrice"
                                        name="sellingPrice"
                                        placeholder="*请输入商品售卖价"
-                                       th:value="${goods!=null and goods.sellingPrice!=null }?${goods.sellingPrice}: 1"
+                                       th:value="${goods!=null and goods.sellingPrice!=null }?${goods.sellingPrice}: ''"
                                        required="true">
                             </div>
                             <div class="form-group" style="display:flex;">
-                                <input type="number" class="form-control col-sm-6" id="stockNum" name="stockNum"
+                                <input type="text" class="form-control col-sm-6" id="stockNum" name="stockNum"
                                        placeholder="*请输入商品库存数"
-                                       th:value="${goods!=null and goods.stockNum!=null }?${goods.stockNum}: 0"
+                                       th:value="${goods!=null and goods.stockNum!=null }?${goods.stockNum}: ''"
                                        required="true">
                                 &nbsp;&nbsp;
                                 <input type="text" class="form-control col-sm-6" id="tag" name="tag"
@@ -113,6 +119,7 @@
                                             <img id="goodsCoverImg" src="/admin/dist/img/img-upload.png"
                                                  style="height: 64px;width: 64px;">
                                         </th:block>
+
                                         <th:block th:unless="${null == goods}">
                                             <img id="goodsCoverImg" th:src="${goods.goodsCoverImg}"
                                                  style="width:160px ;height: 160px;display:block;">
@@ -120,6 +127,7 @@
                                     </div>
                                 </div>
                                 <br>
+                                <!--                                图片上传按钮 -->
                                 <div class="form-group">
                                     <div class="col-sm-4">
                                         <button class="btn btn-info" style="margin-bottom: 5px;"
@@ -129,11 +137,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <!--                            文本编辑区-->
                             <div class="form-group" style="border: 1px solid #ccc;z-index: 1100;">
-                                <div id="editor-toolbar" class="editor-toolbar" style="border-bottom: 1px solid #ccc;"></div>
-                                <input type="hidden" class="editor-text" th:value="${goods!=null and goods.goodsDetailContent !=null}?${goods.goodsDetailContent}: ''">
+                                <div id="editor-toolbar" class="editor-toolbar"
+                                     style="border-bottom: 1px solid #ccc;"></div>
+
+                                <input type="hidden" class="editor-text"
+                                       th:value="${goods!=null and goods.goodsDetailContent !=null}?${goods.goodsDetailContent}: ''">
+
                                 <div id="editor-text-area" class="editor-text-area" style="height: 750px"></div>
                             </div>
+                            <!--                            保存和返回按钮-->
                             <div class="form-group">
                                 <!-- 按钮 -->
                                 &nbsp;<button class="btn btn-info float-right" style="margin-left: 5px;"
@@ -166,7 +180,8 @@
 <script th:src="@{/admin/plugins/ajaxupload/ajaxupload.js}"></script>
 <!-- wangEditor -->
 <script th:src="@{/admin/plugins/wangeditor-5.1.23/index.js}"></script>
+<!-- 自定义js -->
 <script th:src="@{/admin/dist/js/public.js}"></script>
-<script th:src="@{/admin/dist/js/newbee_mall_goods_edit.js}"></script>
+<script th:src="@{/admin/dist/js/goods-edit.js}"></script>
 </body>
 </html>

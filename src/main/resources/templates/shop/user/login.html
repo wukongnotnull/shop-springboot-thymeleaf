@@ -40,8 +40,8 @@
                         验证码:&nbsp;
                         <input class="login-info-input verify-code" type="text" name="verifyCode"
                                placeholder="请输入验证码" id="verifyCode"/>
-                        <img alt="单击图片刷新！" style="top: 16px;position: relative;" th:src="@{/common/shop/captcha}"
-                             onclick="this.src='/common/shop/captcha?d='+new Date()*1">
+                        <img alt="单击图片刷新！" style="top: 16px;position: relative;" th:src="@{/common/captcha}"
+                             onclick="this.src='/common/captcha?d='+new Date()*1">
                     </div>
                 </div>
                 <div class="login_submit">

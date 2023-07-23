@@ -20,13 +20,12 @@ function isNull(obj) {
  * @returns {boolean}
  */
 function validLength(obj, length) {
-    if (obj.trim().length === length) {
-        console.log("验证的长度为：",obj.trim().length);
+    if (obj.trim().length < length) {
         return true;
     }
     return false;
 }
-
+//validLength("aa",500)
 /**
  * url验证
  *

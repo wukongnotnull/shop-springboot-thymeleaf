@@ -2,6 +2,7 @@ package com.wukongnotnull.shop.mapper;
 
 import com.wukongnotnull.shop.domain.GoodsDetail;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.wukongnotnull.shop.util.PageQueryMapUtil;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,6 +28,20 @@ public interface GoodsDetailMapper extends BaseMapper<GoodsDetail> {
      * @return GoodsDetail
      */
     GoodsDetail selectGoodsDetail(@Param("goodsId") Long goodsId);
+
+    
+    List<GoodsDetail> selectGoodsList(PageQueryMapUtil pageUtil);
+
+
+    int getTotalGoodsCount(PageQueryMapUtil pageUtil);
+
+
+    GoodsDetail selectByCategoryIdAndName(@Param("goodsName") String goodsName,
+                                          @Param("goodsCategoryId") Long goodsCategoryId);
+
+    Integer insertSelective(GoodsDetail goodsDetail);
+
+    int updateSellStatusBatch(@Param("ids") List<Long> ids, @Param("goodsSellStatus") Integer goodsSellStatus);
 }
 
 

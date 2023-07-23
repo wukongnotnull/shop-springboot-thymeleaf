@@ -44,4 +44,8 @@ public class Constants {
      * 登录成功 Key
      */
     public static final String LOGIN_SUCCESS_SESSION_KEY = "LOGIN_SUCCESS_SESSION_KEY" ;
+    /**
+     *  background admin account login session
+     */
+    public static final String ADMIN_LOGIN_SUCCESS_SESSION_KEY = "ADMIN_LOGIN_SUCCESS_SESSION_KEY";
 }

@@ -39,4 +39,15 @@
             limit 0, #{categoryMaxNum}
         </if>
     </select>
+
+    <select id="selectCategoryBy" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from shop_goods_category
+        where category_id = #{categoryId}
+
+
+    </select>
+
+
 </mapper>

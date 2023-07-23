@@ -9,6 +9,4 @@ create table shop_admin_user
 )
     charset = utf8;
 
-INSERT INTO db_wukong_shop.shop_admin_user (admin_user_id, login_user_name, login_password, nick_name, locked) VALUES (1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', '十三', 0);
-INSERT INTO db_wukong_shop.shop_admin_user (admin_user_id, login_user_name, login_password, nick_name, locked) VALUES (2, 'newbee-admin1', 'e10adc3949ba59abbe56e057f20f883e', '新蜂01', 0);
-INSERT INTO db_wukong_shop.shop_admin_user (admin_user_id, login_user_name, login_password, nick_name, locked) VALUES (3, 'newbee-admin2', 'e10adc3949ba59abbe56e057f20f883e', '新蜂02', 0);
+INSERT INTO db_wukong_shop.shop_admin_user (admin_user_id, login_user_name, login_password, nick_name, locked) VALUES (4, 'admin', '21232f297a57a5a743894a0e4a801fc3', '悟空非空也', 0);

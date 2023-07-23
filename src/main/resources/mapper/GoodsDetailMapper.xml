@@ -33,6 +33,121 @@
         update_time,is_deleted
     </sql>
 
+    <insert id="insertSelective" parameterType="com.wukongnotnull.shop.domain.GoodsDetail">
+        insert into shop_goods_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="goodsName != null">
+                goods_name,
+            </if>
+            <if test="goodsIntro != null">
+                goods_intro,
+            </if>
+            <if test="goodsCategoryId != null">
+                goods_category_id,
+            </if>
+            <if test="goodsCoverImg != null">
+                goods_cover_img,
+            </if>
+            <if test="goodsCarousels != null">
+                goods_carousels,
+            </if>
+            <if test="originalPrice != null">
+                original_price,
+            </if>
+            <if test="sellingPrice != null">
+                selling_price,
+            </if>
+            <if test="stockNum != null">
+                stock_num,
+            </if>
+            <if test="tag != null">
+                tag,
+            </if>
+            <if test="goodsSellStatus != null">
+                goods_sell_status,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="goodsDetailContent != null">
+                goods_detail_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=BIGINT},
+            </if>
+            <if test="goodsName != null">
+                #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsIntro != null">
+                #{goodsIntro,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsIntro != null">
+                #{goodsCategoryId,jdbcType=BIGINT},
+            </if>
+            <if test="goodsCoverImg != null">
+                #{goodsCoverImg,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsCarousels != null">
+                #{goodsCarousels,jdbcType=VARCHAR},
+            </if>
+            <if test="originalPrice != null">
+                #{originalPrice,jdbcType=INTEGER},
+            </if>
+            <if test="sellingPrice != null">
+                #{sellingPrice,jdbcType=INTEGER},
+            </if>
+            <if test="stockNum != null">
+                #{stockNum,jdbcType=INTEGER},
+            </if>
+            <if test="tag != null">
+                #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsSellStatus != null">
+                #{goodsSellStatus,jdbcType=TINYINT},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="goodsDetailContent != null">
+                #{goodsDetailContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateSellStatusBatch">
+        update shop_goods_detail
+        set goods_sell_status = #{goodsSellStatus}
+        where goods_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        and is_deleted = 0
+
+    </update>
+
     <select id="getGoodsDetailListOnSale" resultType="com.wukongnotnull.shop.domain.GoodsDetail">
         select
         <include refid="Base_Column_List"/>
@@ -53,5 +168,59 @@
         where goods_id = #{goodsId}
         and is_deleted = 0
     </select>
+
+    <select id="selectGoodsList" resultType="com.wukongnotnull.shop.domain.GoodsDetail">
+        select
+        <include refid="Base_Column_List"/>
+        from shop_goods_detail
+        <where>
+            <if test="goodsName!=null and goodsName!=''">
+                and goods_name like CONCAT('%','#{goodsName}','%')
+            </if>
+            <if test="goodsSellStatus!=null and goodsSellStatus!=''">
+                and goods_sell_status = #{goodsSellStatus}
+            </if>
+            <if test="startTime != null and startTime.trim() != ''">
+                and create_time &gt; #{startTime}
+            </if>
+            <if test="endTime != null and endTime.trim() != ''">
+                and create_time &lt; #{endTime}
+            </if>
+        </where>
+        order by goods_id desc
+        <if test="start!=null and limit!=null">
+            limit #{start},#{limit}
+        </if>
+
+
+    </select>
+
+    <select id="getTotalGoodsCount" resultType="java.lang.Integer">
+        select count(*)
+        from shop_goods_detail
+        <where>
+            <if test="goodsName!=null and goodsName!=''">
+                and goods_name like CONCAT('%','#{goodsName}','%')
+            </if>
+            <if test="goodsSellStatus!=null and goodsSellStatus!=''">
+                and goods_sell_status = #{goodsSellStatus}
+            </if>
+            <if test="startTime != null and startTime.trim() != ''">
+                and create_time &gt; #{startTime}
+            </if>
+            <if test="endTime != null and endTime.trim() != ''">
+                and create_time &lt; #{endTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByCategoryIdAndName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from shop_goods_detail
+        where goods_name = #{goodsName}
+          and goods_category_id = #{goodsCategoryId}
+    </select>
+
 
 </mapper>

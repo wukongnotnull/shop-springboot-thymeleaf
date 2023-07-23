@@ -116,6 +116,38 @@ public class GoodsCategoryServiceImpl extends ServiceImpl<GoodsCategoryMapper, G
         }
         return  indexCategoryVOList;
     }
+
+    /**
+     * 根据分类级别 和 父分类id列表 查询商品分栏列表
+     *
+     * @param level     分类级别
+     * @param parentIds ParentIds
+     * @return List<GoodsCategory>
+     */
+    @Override
+    public List<GoodsCategory> selectByLevelAndParentIdsAndNumber(Integer level, List<Long> parentIds) {
+
+        return goodsCategoryMapper.selectByLevelAndParentIdsAndNumber(level, parentIds, 10);
+    }
+
+    /**
+     * queryCategoryBy
+     *
+     * @param categoryId categoryId
+     * @return GoodsCategory
+     */
+    @Override
+    public GoodsCategory queryCategoryBy(Long categoryId) {
+       return goodsCategoryMapper.selectCategoryBy(categoryId);
+
+    }
+
+    @Override
+    public Long findFatherCategoryId(Long thirdLevelCategoryId) {
+        GoodsCategory goodsCategory = goodsCategoryMapper.selectCategoryBy(thirdLevelCategoryId);
+
+        return goodsCategory.getParentId();
+    }
 }
 
 

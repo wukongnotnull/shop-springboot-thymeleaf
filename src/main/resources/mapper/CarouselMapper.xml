@@ -30,4 +30,17 @@
         order by carousel_rank desc
         limit #{num}
     </select>
+
+    <select id="findCarouselListPage" resultType="com.wukongnotnull.shop.domain.Carousel">
+        select <include refid="Base_Column_List"/>
+        from shop_carousel
+        where is_deleted = 0
+        order by carousel_rank desc
+        limit #{start},#{limit}
+    </select>
+    <select id="getCarouselsTotalCount" resultType="java.lang.Integer">
+        select count(1)
+        from shop_carousel
+        where is_deleted = 0
+    </select>
 </mapper>

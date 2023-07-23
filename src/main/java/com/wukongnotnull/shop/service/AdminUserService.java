@@ -2,6 +2,7 @@ package com.wukongnotnull.shop.service;
 
 import com.wukongnotnull.shop.domain.AdminUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wukongnotnull.shop.service.impl.AdminUserServiceImpl;
 
 /**
 * @author wukong
@@ -10,4 +11,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface AdminUserService extends IService<AdminUser> {
 
+
+    AdminUser doLogin(String userName, String password);
+
+    Integer register(AdminUser adminUser);
 }

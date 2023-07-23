@@ -3,6 +3,8 @@ package com.wukongnotnull.shop.service;
 import com.wukongnotnull.shop.controller.vo.IndexCarouselVO;
 import com.wukongnotnull.shop.domain.Carousel;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wukongnotnull.shop.util.PageQueryMapUtil;
+import com.wukongnotnull.shop.util.PageResult;
 
 import java.util.List;
 
@@ -18,4 +20,6 @@ public interface CarouselService extends IService<Carousel> {
      * @return  List<Carousel>
      */
     List<IndexCarouselVO>getIndexCarousel();
+
+    PageResult getCarouselPage(PageQueryMapUtil pageUtil);
 }

@@ -14,6 +14,14 @@ class GoodsDetailMapperTest {
     @Autowired
     private GoodsDetailMapper goodsDetailMapper;
 
+ /*   @Test
+    void insertSelective(){
+        GoodsDetail goodsDetail = new GoodsDetail();
+        goodsDetail.
+        Integer integer = goodsDetailMapper.insertSelective(goodsDetail);
+        System.out.println("integer = " + integer);
+    }*/
+
     @Test
     void getGoodsDetailList() {
         List<Long> ids = new ArrayList<>();

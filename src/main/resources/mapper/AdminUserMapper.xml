@@ -5,15 +5,60 @@
 <mapper namespace="com.wukongnotnull.shop.mapper.AdminUserMapper">
 
     <resultMap id="BaseResultMap" type="com.wukongnotnull.shop.domain.AdminUser">
-            <id property="adminUserId" column="admin_user_id" jdbcType="INTEGER"/>
-            <result property="loginUserName" column="login_user_name" jdbcType="VARCHAR"/>
-            <result property="loginPassword" column="login_password" jdbcType="VARCHAR"/>
-            <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
-            <result property="locked" column="locked" jdbcType="TINYINT"/>
+        <id property="adminUserId" column="admin_user_id" jdbcType="INTEGER"/>
+        <result property="loginUserName" column="login_user_name" jdbcType="VARCHAR"/>
+        <result property="loginPassword" column="login_password" jdbcType="VARCHAR"/>
+        <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
+        <result property="locked" column="locked" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        admin_user_id,login_user_name,login_password,
+        admin_user_id
+        ,login_user_name,login_password,
         nick_name,locked
     </sql>
+
+    <insert id="addAdminUser" parameterType="com.wukongnotnull.shop.domain.AdminUser">
+        insert into shop_admin_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="adminUser.loginUserName != null">
+                login_user_name,
+            </if>
+            <if test="adminUser.loginPassword != null">
+                login_password,
+            </if>
+            <if test="adminUser.nickName != null">
+                nick_name,
+            </if>
+            <if test="adminUser.locked !=null">
+                locked
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="adminUser.loginUserName != null">
+                #{adminUser.loginUserName},
+            </if>
+            <if test="adminUser.loginPassword != null">
+                #{adminUser.loginPassword},
+            </if>
+            <if test="adminUser.nickName != null">
+                #{adminUser.nickName},
+            </if>
+            <if test="adminUser.locked != null">
+                #{adminUser.locked}
+            </if>
+        </trim>
+
+    </insert>
+
+
+    <select id="doLogin" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from shop_admin_user
+        where login_user_name = #{userName,jdbcType=VARCHAR}
+        AND login_password=#{password,jdbcType=VARCHAR}
+        AND locked = 0
+    </select>
+
 </mapper>
