@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.servlet.http.HttpSession;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 class OrdinaryUserServiceTest {
     @Autowired

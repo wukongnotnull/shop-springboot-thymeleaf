@@ -3,8 +3,9 @@ package com.wukongnotnull.shop.service;
 import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
 import com.wukongnotnull.shop.domain.OrdinaryUser;
 import com.baomidou.mybatisplus.extension.service.IService;
-
 import javax.servlet.http.HttpSession;
+
+
 
 /**
 * @author wukong
@@ -46,5 +47,5 @@ public interface OrdinaryUserService extends IService<OrdinaryUser> {
      * @param  httpSession httpSession
      * @return String
      */
-    String modifyOrdinaryUserInfo(OrdinaryUserVO ordinaryUserVO,HttpSession httpSession);
+    String modifyOrdinaryUserInfo(OrdinaryUserVO ordinaryUserVO, HttpSession httpSession);
 }

@@ -15,7 +15,6 @@ import com.wukongnotnull.shop.util.BeanUtil;
 import com.wukongnotnull.shop.util.PageQueryMapUtil;
 import com.wukongnotnull.shop.util.PageResult;
 import com.wukongnotnull.shop.util.ShopUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

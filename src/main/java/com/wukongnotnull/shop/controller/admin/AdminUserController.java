@@ -4,6 +4,9 @@ import cn.hutool.captcha.ShearCaptcha;
 import com.wukongnotnull.shop.common.Constants;
 import com.wukongnotnull.shop.domain.AdminUser;
 import com.wukongnotnull.shop.service.AdminUserService;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
+
 
 @Controller
 @RequestMapping("/admin")

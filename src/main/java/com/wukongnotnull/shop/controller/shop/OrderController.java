@@ -11,12 +11,13 @@ import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
 import com.wukongnotnull.shop.service.OrderService;
 import com.wukongnotnull.shop.service.bo.OrderDetailPageBO;
 import com.wukongnotnull.shop.util.BeanUtil;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
+
 
 /**
  * @author 悟空非空也

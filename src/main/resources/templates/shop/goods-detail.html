@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="shop/common/header::head-fragment('WuKong 商城-商品详情','detail')">
-</head>
+<head th:replace="~{shop/common/header::head-fragment('WuKong 商城-商品详情','detail')}"></head>
 <body>
 <header th:replace="shop/common/header::header-fragment"></header>
 
@@ -18,7 +17,7 @@
 
     <div class="intro mt20 w clearfix">
         <div class="left fl" style="position: relative;">
-            <div class="swiper-container fl" >
+            <div class="swiper-container fl">
                 <!--<img th:src="@{${goodsDetail.goodsCoverImg}}">-->
                 <div class="swiper-wrapper">
                     <th:block th:each="goodsCarousel : ${goodsDetail.goodsCarouselList}">
@@ -97,12 +96,12 @@
                     Swal.fire({
                         title: "确认框",
                         text: "添加成功",
-                        icon: "success",iconColor:"#1d953f",
+                        icon: "success", iconColor: "#1d953f",
                         showCancelButton: true,
                         confirmButtonText: '确认',
                         cancelButtonText: '取消'
                     }).then((flag) => {
-                           if (flag.value) {
+                            if (flag.value) {
                                 window.location.reload();
                                 //window.location.href="/";
                             }
@@ -111,14 +110,14 @@
                 } else {
                     Swal.fire({
                         text: response.msg,
-                        icon: "error",iconColor:"#f05b72",
+                        icon: "error", iconColor: "#f05b72",
                     });
                 }
             },
             error: function () {
                 Swal.fire({
                     text: "操作失败",
-                    icon: "error",iconColor:"#f05b72",
+                    icon: "error", iconColor: "#f05b72",
                 });
             }
         });
@@ -143,7 +142,7 @@
                     Swal.fire({
                         title: "确认框",
                         text: "已将商品加入购物车",
-                        icon: "success",iconColor:"#1d953f",
+                        icon: "success", iconColor: "#1d953f",
                         showCancelButton: true,
                         confirmButtonText: '去购物车结算',
                         cancelButtonText: '留在当前页'
@@ -156,14 +155,14 @@
                 } else {
                     Swal.fire({
                         text: result.message,
-                        icon: "error",iconColor:"#f05b72",
+                        icon: "error", iconColor: "#f05b72",
                     });
                 }
             },
             error: function () {
                 Swal.fire({
                     text: "操作失败",
-                    icon: "error",iconColor:"#f05b72",
+                    icon: "error", iconColor: "#f05b72",
                 });
             }
         });

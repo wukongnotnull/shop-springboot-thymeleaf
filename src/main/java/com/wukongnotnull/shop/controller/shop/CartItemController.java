@@ -9,12 +9,13 @@ import com.wukongnotnull.shop.controller.vo.OrdinaryUserVO;
 import com.wukongnotnull.shop.domain.CartItem;
 import com.wukongnotnull.shop.exception.ShopException;
 import com.wukongnotnull.shop.service.CartItemService;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
+
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ public class CartItemController {
      * 结算
      */
     @GetMapping("/shop-cart/order-settle")
-    public String settle(HttpSession httpSession,Model model){
+    public String settle(HttpSession httpSession, Model model){
         // 获得购物车明细vo列表
         // 查询指定用户下的购物车明细记录
         OrdinaryUserVO ordinaryUserVO = (OrdinaryUserVO) httpSession.getAttribute(Constants.LOGIN_SUCCESS_SESSION_KEY);

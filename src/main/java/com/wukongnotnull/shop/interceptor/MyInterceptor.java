@@ -1,18 +1,17 @@
 package com.wukongnotnull.shop.interceptor;
 
-import org.slf4j.Logger;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class MyInterceptor  implements HandlerInterceptor {
 
     @Override
-    public boolean preHandle(HttpServletRequest request, 
-                             HttpServletResponse response, 
+    public boolean preHandle(HttpServletRequest request,
+                             HttpServletResponse response,
                              Object handler) throws Exception {
         // 访问某 url，当发现在未登录状态下，拦截，跳转到登录页
         Object username = request.getSession().getAttribute("userSession");
