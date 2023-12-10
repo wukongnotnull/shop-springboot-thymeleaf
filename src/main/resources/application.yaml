@@ -2,10 +2,11 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: jdbc:mysql://localhost:3306/db_wukong_shop?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
+    # 新加坡mysql服务
+    url: jdbc:mysql://8.222.146.217:3306/db_wukong_shop?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: rootroot
+    username: db_wukong_shop
+    password: db_wukong_shop
     # 阿里 druid 数据源
     type: com.alibaba.druid.pool.DruidDataSource
     initialSize: 30
